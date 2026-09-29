@@ -5,11 +5,11 @@ import paramiko
 import time
 from typing import Optional
 
-REMOTE_HOST = "connect.bjb1.seetacloud.com"
-REMOTE_PORT = 11667
-REMOTE_USER = "root"
-REMOTE_PASS = "WLRJRlKe27Bk"
-REMOTE_PROJECT_DIR = "/root/autodl-tmp/DASFAA"
+REMOTE_HOST = os.environ.get("AUTODL_HOST", "connect.autodl.com")
+REMOTE_PORT = int(os.environ.get("AUTODL_PORT", "22"))
+REMOTE_USER = os.environ.get("AUTODL_USER", "root")
+REMOTE_PASS = os.environ.get("AUTODL_PASS", "")
+REMOTE_PROJECT_DIR = os.environ.get("AUTODL_PROJECT_DIR", "/root/autodl-tmp/DASFAA")
 
 def get_ssh_client(retries: int = 3, delay: float = 2.0) -> paramiko.SSHClient:
     last_err = None

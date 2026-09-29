@@ -12,6 +12,7 @@ Strictly implements:
 
 import numpy as np
 import pytest
+timesfm3 = pytest.importorskip("timesfm3")
 import torch
 
 from probe.config import MODEL_DIR

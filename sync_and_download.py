@@ -4,10 +4,10 @@ import sys
 from pathlib import Path
 import paramiko
 
-REMOTE_HOST = "connect.bjb1.seetacloud.com"
-REMOTE_PORT = 11667
-REMOTE_USER = "root"
-REMOTE_PASS = "WLRJRlKe27Bk"
+REMOTE_HOST = os.environ.get("AUTODL_HOST", "connect.autodl.com")
+REMOTE_PORT = int(os.environ.get("AUTODL_PORT", "22"))
+REMOTE_USER = os.environ.get("AUTODL_USER", "root")
+REMOTE_PASS = os.environ.get("AUTODL_PASS", "")
 
 LOCAL_BASE = Path(r"E:\Desktop\DASFAA")
 LOCAL_RESULTS = LOCAL_BASE / "results"

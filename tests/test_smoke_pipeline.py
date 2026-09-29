@@ -12,6 +12,7 @@ Runs 5 windows across ALL 8 LTSF datasets and verifies all 7 critical red-flag m
 import os
 from pathlib import Path
 import pytest
+timesfm3 = pytest.importorskip("timesfm3")
 import numpy as np
 import pandas as pd
 import torch

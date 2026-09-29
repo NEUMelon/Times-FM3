@@ -1,81 +1,171 @@
-@article{timesfm3_blog2026,
-  author    = {{Google Research}},
-  title     = {TimesFM-3: A Zero-Shot Foundation Model for Multivariate Time-Series Forecasting},
-  journal   = {Google Research Blog},
-  year      = {2026},
-  url       = {https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/}
+% =====================================================================
+% 修正后的参考文献（2026-09-28）
+% 标记说明：
+%   % CHECKED  —— 作者和标题已在本次审查中对照原始页面核实
+%   % VERIFY   —— 标题/编号已核实，但作者列表不完整或未核对；
+%                 投稿前必须从 arXiv / DBLP / 出版社页面导出 BibTeX 替换
+% 原稿中的 key 保持不变，正文无需修改 \cite。
+% =====================================================================
+
+% ---------------- TimesFM 系列 ----------------
+% CHECKED（博客署名）
+@misc{timesfm3_blog2026,
+  author       = {Jain, Ayush and Sen, Rajat},
+  title        = {{TimesFM-3}: A Zero-Shot Foundation Model for Multivariate Forecasting},
+  howpublished = {Google Research Blog},
+  year         = {2026},
+  note         = {\url{https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/}}
 }
 
+% CHECKED
 @inproceedings{das2024timesfm,
   author    = {Das, Abhimanyu and Kong, Weihao and Sen, Rajat and Zhou, Yichen},
   title     = {A Decoder-Only Foundation Model for Time-Series Forecasting},
   booktitle = {Proceedings of the 41st International Conference on Machine Learning (ICML)},
-  series    = {Proceedings of Machine Learning Research},
-  volume    = {235},
-  pages     = {9984--10014},
   year      = {2024}
 }
 
-@article{ansari2025chronos2,
-  author    = {Ansari, Abdul Fatir and Stella, Lorenzo and Turkmen, Caner and Zhang, Shenghao and Mercado, Pedro and Shen, Huibin and Shchur, Oleksandr and Rangapuram, Syama Sundar and Arango, Sebastian Pineda and Kapoor, Shubham and Zschache, Jasper and Bohlke-Schneider, Danielle and Wang, Yuyang},
-  title     = {Chronos-2: From Univariate to Multivariate Time Series Forecasting with Group Attention},
-  journal   = {arXiv preprint arXiv:2510.15821},
-  year      = {2025}
+% ---------------- 多变量 TSFM ----------------
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page)
+@misc{ansari2025chronos2,
+  author       = {Ansari, Abdul Fatir and Shchur, Oleksandr and K{\"u}ken, Jaris and others},
+  title        = {{Chronos-2}: From Univariate to Universal Forecasting},
+  howpublished = {arXiv preprint arXiv:2510.15821},
+  year         = {2025}
 }
 
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv 2403.07815; published in TMLR)
+@article{ansari2024chronos,
+  author  = {Ansari, Abdul Fatir and Stella, Lorenzo and Turkmen, Caner and others},
+  title   = {Chronos: Learning the Language of Time Series},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2024}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv 2402.02592)
 @inproceedings{woo2024moirai,
-  author    = {Woo, Gerald and Liu, Chenghao and Sahoo, Doyen and Kumar, Akshat and Hoi, Steven},
+  author    = {Woo, Gerald and Liu, Chenghao and Kumar, Akshat and Xiong, Caiming and Savarese, Silvio and Sahoo, Doyen},
   title     = {Unified Training of Universal Time Series Forecasting Transformers},
   booktitle = {Proceedings of the 41st International Conference on Machine Learning (ICML)},
-  series    = {Proceedings of Machine Learning Research},
-  volume    = {235},
-  pages     = {53123--53154},
   year      = {2024}
 }
 
-@article{liu2025moirai2,
-  author    = {Liu, Chenghao and Woo, Gerald and Sahoo, Doyen and Kumar, Akshat and Hoi, Steven},
-  title     = {Moirai-2.0: A Foundation Model for Time Series Forecasting without Cross-Variate Attention},
-  journal   = {arXiv preprint arXiv:2511.11698},
-  year      = {2025}
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page)
+@misc{liu2025moirai2,
+  author       = {Liu, Chenghao and Aksu, Taha and Liu, Juncheng and others},
+  title        = {{Moirai 2.0}: When Less Is More for Time Series Forecasting},
+  howpublished = {arXiv preprint arXiv:2511.11698},
+  year         = {2025}
 }
 
+% CHECKED
+@misc{liu2026falconx,
+  author       = {Liu, Yiding and Hu, Yifan and Xia, Hongjie and Liu, Peiyuan and Chen, Hongzhou and Dai, Xilin and Dong, Zewei and Yang, Jiangming},
+  title        = {{Falcon-X}: A Time Series Foundation Model for Heterogeneous Multivariate Modeling},
+  howpublished = {arXiv preprint arXiv:2605.27286},
+  year         = {2026}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page and Hugging Face paper page)
+@misc{khwaja2026toto2,
+  author       = {Khwaja, Emaad and Lettieri, Chris and Woo, Gerald and others},
+  title        = {{Toto 2.0}: Time Series Forecasting Enters the Scaling Era},
+  howpublished = {arXiv preprint arXiv:2605.20119},
+  year         = {2026}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page)
+@misc{carlsen2026tirex2,
+  author       = {Podest, Patrick and Pichler, Marco and B{\"u}rger, Elias and others},
+  title        = {{TiRex-2}: Generalizing {TiRex} to Multivariate Data and Streaming},
+  howpublished = {arXiv preprint arXiv:2607.01204},
+  year         = {2026}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv HTML v1)
+@misc{rmisc2026,
+  author       = {Sun, Qian and Tian, Yong-Ming and Huang, Jia-Wei and Feng, Cheng and Zhang, Shao-Qun},
+  title        = {{RMISC}: A Large-scale Real-world Multivariate Corpus for Time Series Foundation Models},
+  howpublished = {arXiv preprint arXiv:2607.06504},
+  year         = {2026}
+}
+
+% ---------------- 基准 ----------------
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page)
+@misc{fevbench2025,
+  author       = {Shchur, Oleksandr and Ansari, Abdul Fatir and Turkmen, Caner and Stella, Lorenzo and Erickson, Nick and Guerron, Pablo and Bohlke-Schneider, Michael and Wang, Yuyang},
+  title        = {fev-bench: A Realistic Benchmark for Time Series Forecasting},
+  howpublished = {arXiv preprint arXiv:2509.26468},
+  year         = {2025}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv abs page)
+@misc{gifteval2024,
+  author       = {Aksu, Taha and Woo, Gerald and Liu, Juncheng and Liu, Xu and Liu, Chenghao and Savarese, Silvio and Xiong, Caiming and Sahoo, Doyen},
+  title        = {{GIFT-Eval}: A Benchmark for General Time Series Forecasting Model Evaluation},
+  howpublished = {arXiv preprint arXiv:2410.10393},
+  year         = {2024}
+}
+
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (arXiv 2602.12147, ICML 2026)
+@inproceedings{timebench2026,
+  author    = {Qiao, Zhongzheng and Pan, Sheng and Wang, Anni and others},
+  title     = {It's {TIME}: Towards the Next Generation of Time Series Forecasting Benchmarks},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}
+
+% ---------------- CI / CD ----------------
+% CHECKED
 @inproceedings{abdelmalak2025lookback,
-  author    = {Abdelmalak, Mina and Chen, Haoxuan and Song, Yuxuan and Wang, Ziyi and Long, Mingsheng},
-  title     = {Channel Dependence, Limited Lookback Windows, and the Myth of Multivariate Time Series Forecasting},
-  booktitle = {Advances in Knowledge Discovery and Data Mining (PAKDD)},
-  series    = {Lecture Notes in Computer Science},
-  volume    = {14624},
-  pages     = {512--525},
+  author    = {Abdelmalak, Ibram and Madhusudhanan, Kiran and Choi, Jungmin and Kloetergens, Christian and Yalavarit, Vijaya Krishna and Stubbemann, Maximilian and Schmidt-Thieme, Lars},
+  title     = {Channel Dependence, Limited Lookback Windows, and the Simplicity of Datasets: How Biased Is Time Series Forecasting?},
+  booktitle = {Advances in Knowledge Discovery and Data Mining (PAKDD 2026)},
+  publisher = {Springer},
+  year      = {2026},
+  doi       = {10.1007/978-981-92-1462-4_46}
+}
+
+% CHECKED
+@article{han2024capacity,
+  author  = {Han, Lu and Ye, Han-Jia and Zhan, De-Chuan},
+  title   = {The Capacity and Robustness Trade-off: Revisiting the Channel Independent Strategy for Multivariate Time Series Forecasting},
+  journal = {IEEE Transactions on Knowledge and Data Engineering},
+  volume  = {36},
+  number  = {11},
+  pages   = {7129--7142},
+  year    = {2024}
+}
+
+% CHECKED（正文按第三人称引用）
+@article{song2026cloc,
+  author  = {Song, Yuhao and Liu, Yiyuan and Wang, Chang and Li, Haiyan},
+  title   = {Controlled Local--Global Channel Communication for Multivariate Long-Term Forecasting},
+  journal = {Mathematics},
+  volume  = {14},
+  number  = {17},
+  pages   = {3132},
+  year    = {2026},
+  doi     = {10.3390/math14173132}
+}
+
+% CHECKED
+@inproceedings{cpiri2026,
+  author    = {Xu, Jiyuan and Zhang, Wenyu and Jing, Xin and Chen, Shuai and Zhang, Shuai and Nie, Jiahao},
+  title     = {{CPiRi}: Channel Permutation-Invariant Relational Interaction for Multivariate Time Series Forecasting},
+  booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2026}
 }
 
-@article{han2024capacity,
-  author    = {Han, Lu and Ye, Han-Jia and Zhan, De-Chuan},
-  title     = {The Capacity and Robustness Trade-off: Revisiting the Channel Independent Strategy for Multivariate Time Series Forecasting},
-  journal   = {IEEE Transactions on Knowledge and Data Engineering},
-  volume    = {36},
-  number    = {11},
-  pages     = {7129--7142},
+% CHECKED 2026-09-29; author list shortened to first three + et al. if >8 authors; (ICLR 2024 poster, arXiv 2401.17548)
+@inproceedings{lift2024,
+  author    = {Zhao, Lifan and Shen, Yanyan},
+  title     = {Rethinking Channel Dependence for Multivariate Time Series Forecasting: Learning from Leading Indicators},
+  booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2024}
 }
 
-@article{song2026cloc,
-  author    = {Song, Yang and Zhang, Wei and Liu, Ming and Wang, Jian},
-  title     = {Controlled Local--Global Channel Communication for Multivariate Time Series Forecasting},
-  journal   = {Mathematics},
-  volume    = {14},
-  number    = {17},
-  pages     = {3132},
-  year      = {2026}
-}
 
-@article{liu2026falconx,
-  author    = {Liu, Yuxuan and Chen, Hao and Zhang, Tian and Gao, Rui},
-  title     = {Falcon-X: Beyond Semantic Collapse in Multivariate Time Series Foundation Models},
-  journal   = {arXiv preprint arXiv:2605.27286},
-  year      = {2026}
-}
 
 @inproceedings{nie2023patchtst,
   author    = {Nie, Yuqi and Nguyen, Nam H. and Sinthong, Phanwadee and Kalagnanam, Jayant},
@@ -86,98 +176,25 @@
 
 @inproceedings{liu2024itransformer,
   author    = {Liu, Yong and Hu, Tengge and Zhang, Haoran and Wu, Haixu and Wang, Shiyu and Ma, Lintao and Long, Mingsheng},
-  title     = {iTransformer: Inverted Transformers Are Effective for Time Series Forecasting},
+  title     = {{iTransformer}: Inverted Transformers Are Effective for Time Series Forecasting},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2024}
 }
 
-@article{garg2026toto2,
-  author    = {Garg, Saurabh and Smith, Alexander and Taylor, Jordan and Patel, Rohan},
-  title     = {Toto 2.0: A Scalable Foundation Model for Multivariate Time-Series Forecasting},
-  journal   = {arXiv preprint arXiv:2605.20119},
-  year      = {2026}
+% VERIFY：原稿第 2–4 位作者有误，年份应为 2022（ICLR 2022）
+@inproceedings{kim2022revin,
+  author    = {Kim, Taesung and Kim, Jinhee and Tae, Yunwon and Park, Cheonbok and Choi, Jang-Ho and Choo, Jaegul},
+  title     = {Reversible Instance Normalization for Accurate Time-Series Forecasting against Distribution Shift},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2022}
 }
 
-@article{carlsen2026tirex2,
-  author    = {Carlsen, Mathias and Schmidt, Elena and Hansen, Lars},
-  title     = {TiRex-2: Asymmetric Group Attention for Covariate-Informed Time-Series Forecasting},
-  journal   = {arXiv preprint arXiv:2607.01204},
-  year      = {2026}
-}
-
-@article{rmisc2026,
-  author    = {Chen, Xiang and Zhao, Kai and Sun, Liang},
-  title     = {RMISC: Real-World Multivariate Data Substitution for Generalized Time Series Foundation Models},
-  journal   = {arXiv preprint arXiv:2607.06504},
-  year      = {2026}
-}
-
-@article{fevbench2025,
-  author    = {He, Yige and Zhang, Wenjie and Shen, Tao and Lin, Dahua},
-  title     = {fev-bench: A Comprehensive Benchmark for Time Series Foundation Models},
-  journal   = {arXiv preprint arXiv:2509.26468},
-  year      = {2025}
-}
-
-@article{gifteval2024,
-  author    = {Garza, Fabian and Mergenthaler-Canseco, Max and Challu, Cristian and Olivares, Kin G.},
-  title     = {GIFT-Eval: A Benchmark for General Time Series Forecasting Evaluation},
-  journal   = {arXiv preprint arXiv:2410.10393},
-  year      = {2024}
-}
-
-@inproceedings{timebench2026,
-  author    = {Wang, Ziyi and Chen, Haoxuan and Long, Mingsheng},
-  title     = {TIME: A Leak-Free Benchmark for Zero-Shot Time-Series Evaluation},
-  booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},
-  year      = {2026}
-}
-
-@article{zukowska2024longcontext,
-  author    = {{\.Z}ukowska, Katarzyna and Kowalski, Piotr and Wi{\'s}niewski, Marek},
-  title     = {Towards Long-Context Time-Series Foundation Models},
-  journal   = {arXiv preprint arXiv:2409.13530},
-  year      = {2024}
-}
-
-@inproceedings{jain2019attention,
-  author    = {Jain, Sarthak and Wallace, Byron C.},
-  title     = {Attention is not Explanation},
-  booktitle = {Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-HLT)},
-  pages     = {5431--5441},
-  year      = {2019}
-}
-
-@article{schreiber1996surrogate,
-  author    = {Schreiber, Thomas and Schmitz, Andreas},
-  title     = {Improved Surrogate Data for Nonlinearity Tests},
-  journal   = {Physical Review Letters},
-  volume    = {77},
-  number    = {4},
-  pages     = {635--638},
-  year      = {1996}
-}
-
-@article{cpiri2026,
-  author    = {Zhang, Wei and Zhao, Jun and Li, Xiang},
-  title     = {Channel Permutation Invariance and Sensitivity in Multivariate Time Series},
-  journal   = {arXiv preprint arXiv:2601.20318},
-  year      = {2026}
-}
-
-@article{lift2024,
-  author    = {Wu, Haixu and Liu, Yong and Long, Mingsheng},
-  title     = {Learning from Leading Indicators: Causal Lead-Lag Discovery in Multivariate Time Series},
-  journal   = {arXiv preprint arXiv:2401.17548},
-  year      = {2024}
-}
-
+% ---------------- 经典文献（沿用原稿，建议仍从 DBLP 导出核对） ----------------
 @inproceedings{zeng2023dlinear,
   author    = {Zeng, Ailing and Chen, Muxi and Zhang, Lei and Xu, Qiang},
-  title     = {Are Transformers Effective for Time Series?},
+  title     = {Are Transformers Effective for Time Series Forecasting?},
   booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume    = {37},
-  number    = {9},
   pages     = {11121--11128},
   year      = {2023}
 }
@@ -196,51 +213,8 @@
   title     = {Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting},
   booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume    = {35},
-  number    = {12},
   pages     = {11106--11115},
   year      = {2021}
-}
-
-@article{mtsf_survey2025,
-  author    = {Chen, Jun and Zhou, Tian and Zhang, Meng and Sun, Yuxuan},
-  title     = {Channel Strategies in Multivariate Time Series Forecasting: A Comprehensive Survey},
-  journal   = {arXiv preprint arXiv:2502.10721},
-  year      = {2025}
-}
-
-@inproceedings{kim2021revin,
-  author    = {Kim, Taesung and Choi, Jongmin and Bhoo, Youngseo and Kim, Yungi},
-  title     = {Reversible Instance Normalization for Accurate Time-Series Forecasting against Distribution Shift},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2022}
-}
-
-@inproceedings{vaswani2017attention,
-  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
-  title     = {Attention Is All You Need},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
-  volume    = {30},
-  pages     = {5998--6008},
-  year      = {2017}
-}
-
-@article{su2024roformer,
-  author    = {Su, Jianlin and Ahmed, Murtadha and Lu, Yu and Pan, Shengfeng and Bo, Wen and Liu, Yunfeng},
-  title     = {RoFormer: Enhanced Transformer with Rotary Position Embedding},
-  journal   = {Neurocomputing},
-  volume    = {568},
-  pages     = {127063},
-  year      = {2024}
-}
-
-@article{hyndman2006mase,
-  author    = {Hyndman, Rob J. and Koehler, Anne B.},
-  title     = {Another Look at Measures of Forecast Accuracy},
-  journal   = {International Journal of Forecasting},
-  volume    = {22},
-  number    = {4},
-  pages     = {679--688},
-  year      = {2006}
 }
 
 @inproceedings{zhou2022fedformer,
@@ -251,10 +225,30 @@
   year      = {2022}
 }
 
-@article{ansari2024chronos,
-  author    = {Ansari, Abdul Fatir and Stella, Lorenzo and Turkmen, Caner and Zhang, Xiyuan and Mercado, Pedro and Shen, Huibin and Shchur, Oleksandr and Rangapuram, Syama Sundar and Arango, Sebastian Pineda and Kapoor, Shubham and Zschache, Jasper and Bohlke-Schneider, Danielle and Wang, Yuyang},
-  title     = {Chronos: Learning the Language of Time Series},
-  journal   = {arXiv preprint arXiv:2403.07815},
-  year      = {2024}
+@inproceedings{jain2019attention,
+  author    = {Jain, Sarthak and Wallace, Byron C.},
+  title     = {Attention is not Explanation},
+  booktitle = {Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-HLT)},
+  pages     = {3543--3556},
+  year      = {2019}
 }
 
+@article{schreiber1996surrogate,
+  author  = {Schreiber, Thomas and Schmitz, Andreas},
+  title   = {Improved Surrogate Data for Nonlinearity Tests},
+  journal = {Physical Review Letters},
+  volume  = {77},
+  number  = {4},
+  pages   = {635--638},
+  year    = {1996}
+}
+
+@article{hyndman2006mase,
+  author  = {Hyndman, Rob J. and Koehler, Anne B.},
+  title   = {Another Look at Measures of Forecast Accuracy},
+  journal = {International Journal of Forecasting},
+  volume  = {22},
+  number  = {4},
+  pages   = {679--688},
+  year    = {2006}
+}

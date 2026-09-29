@@ -1,349 +1,707 @@
+% =====================================================================
+% DASFAA 2027 submission -- Springer LNCS, <= 16 pages incl. references.
+% Every number in this file is taken from data/*.csv (see scripts/ and the
+% comments next to each table). Do not edit numbers by hand.
+% =====================================================================
 \documentclass[runningheads]{llncs}
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{microtype}
-\usepackage{siunitx}
+\usepackage{array}
+\usepackage{xurl}
+\usepackage{multirow}
 \usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{subfig}
-\usepackage[pdfauthor={},hidelinks]{hyperref}
+\usepackage[pdfauthor={},pdftitle={},hidelinks]{hyperref}
 
-% Adjust float parameters to prevent tables and figures from being pushed to the end
-\renewcommand{\topfraction}{0.90}
-\renewcommand{\bottomfraction}{0.90}
-\renewcommand{\textfraction}{0.10}
-\renewcommand{\floatpagefraction}{0.80}
-
-% Mandatory Probing Notation Macros
-\newcommand{\MV}{\mathrm{MV}}
-\newcommand{\UV}{\mathrm{UV}}
+\newcommand{\MV}{\textsc{mv}}
+\newcommand{\UV}{\textsc{uv}}
 \newcommand{\Ben}{B}
 \newcommand{\Rel}{R}
 \newcommand{\Sen}{S}
 \newcommand{\GC}{\mathrm{GC}}
-\newcommand{\tfm}{\text{TimesFM-3}}
+\newcommand{\tfm}{\mbox{TimesFM-3}}
+\setlength{\emergencystretch}{1.5em}
+\newcommand{\ci}[2]{\mbox{\scriptsize[$#1$,\,$#2$]}}
+\newcommand{\sig}{$^{\ast}$}
+\newcommand{\vc}[3]{\begin{tabular}[t]{@{}c@{}}#1\\[-1pt]{\tiny[$#2$,\,$#3$]}\end{tabular}}
 
 \begin{document}
 
-\title{Does Variate Attention Pay Off? Probing Cross-Channel Information in Multivariate Time-Series Foundation Models}
-\titlerunning{Probing Cross-Channel Information in Multivariate TSFMs}
-
-\author{Anonymous}
+\title{Does Variate Attention Pay Off? Probing Cross-Channel Information Use
+in Multivariate Time-Series Foundation Models}
+\titlerunning{Probing Cross-Channel Information Use in Multivariate TSFMs}
+\author{Anonymous Author(s)}
 \authorrunning{Anonymous}
-\institute{Anonymous Institution\\
-\email{anonymous@placeholder.org}}
-
+\institute{Anonymous Institution\\\email{anonymous@placeholder.org}}
 \maketitle
 
 \begin{abstract}
-Recent zero-shot time-series foundation models (TSFMs) increasingly integrate cross-channel attention, claiming superiority over channel-independent baselines. Yet, whether and how these models utilize inter-channel dependencies remains an unsettled empirical question. We present the first systematic diagnostic probing protocol for cross-variate attention in pretrained TSFMs, evaluated on Google's 330M-parameter $\tfm$. Across 8 standard benchmarks (9,600 test windows), we reveal a pronounced domain bimodality: while variate attention aids physically constrained systems (e.g., weather $+8.0\%$, electricity $+2.9\%$), it causes severe degradation on high-frequency noise domains (solar $-32.0\%$). Through 11 targeted causal interventions, we show that $\tfm$ is strictly permutation-invariant, vulnerable to uncorrelated noise ($20.1\%$ error surge), and relies on micro-phase synchronization rather than static feature pooling. Evaluations against exact Kalman filter oracles on synthetic state-space models quantify the limits of zero-shot factor disentanglement. Finally, mapping the accuracy-latency frontier across channel budgets $K \in \{1..128\}$ reveals that correlation-based Top-$K$ selection capped at 32 channels achieves optimal Pareto efficiency on RTX 4090 GPUs.
-\keywords{Time-Series Foundation Models \and Multivariate Forecasting \and Variate Attention \and Diagnostic Probing \and Empirical Evaluation.}
+In multivariate time-series foundation models such as \tfm{}, each channel
+attends to the others, and the multivariate mode ranks better on public
+benchmarks than univariate forecasting. Whether this gain comes from
+information carried by the other channels is untested. We probe \tfm{} within one set of weights: on
+identical windows we compare its univariate (\UV) and multivariate (\MV)
+modes, corrupt the context channels while leaving the target intact, and
+compare the model with Kalman-filter oracles on synthetic systems. On eight
+benchmarks the benefit of the \MV{} mode ranges from $-31.95\%$ (Solar-Energy,
+$H{=}720$) to $+8.04\%$ (Weather, $H{=}96$). On Electricity, context
+channels replaced by week-aligned history keep half of the gain
+($\Rel{=}0.50$), whereas unaligned history makes the forecast worse than
+using no context ($\Rel{=}2.06$); a one-hour shift is harmless. An injected
+leading indicator is exploited, but a synthetic lead--lag driver is not: the
+model closes at most 29\% of the oracle gap and gains about 3\% even on
+independent channels. Under the reference evaluator, channels outside the
+target's block of 32 leave the forecast unchanged while latency grows from
+55 to 217\,ms. We derive guidelines for aligning, grouping and gating
+channels.
+\keywords{Time-series foundation models \and Channel dependence \and
+Multivariate forecasting \and Model probing \and Interventions}
 \end{abstract}
 
-\section{Introduction}
-\label{sec:intro}
+% =====================================================================
+\section{Introduction}\label{sec:intro}
 
-The field of time-series forecasting has shifted from task-specific architectures toward zero-shot foundation models (TSFMs)~\cite{das2024timesfm,woo2024moirai}. A central architectural divergence among contemporary foundation models concerns channel communication. Early univariate models treated each variate independently~\cite{das2024timesfm}. In contrast, next-generation architectures such as $\tfm$~\cite{timesfm3_blog2026} and Chronos-2~\cite{ansari2025chronos2} introduce specialized cross-channel attention mechanisms, reporting superior aggregate rankings across diverse benchmark suites.
+Time-series foundation models (TSFMs) forecast series they were not trained
+on~\cite{das2024timesfm,ansari2024chronos,woo2024moirai}. The first
+generation treated every channel as a separate univariate series. The
+current generation adds attention across channels: \tfm{}~\cite{timesfm3_blog2026}
+inserts a variate-attention sublayer into each of its 20 layers,
+Chronos-2~\cite{ansari2025chronos2} shares information within groups of
+series, and Toto~2.0~\cite{khwaja2026toto2} and TiRex-2~\cite{carlsen2026tirex2}
+alternate or restrict attention across variates. These models report better
+aggregate ranks on GIFT-Eval~\cite{gifteval2024},
+fev-bench~\cite{fevbench2025} and TIME~\cite{timebench2026}.
 
-However, recent empirical evidence presents conflicting observations regarding cross-channel modeling. While $\tfm$ highlights multivariate gains, Moirai-2.0~\cite{liu2025moirai2} explicitly reverted from any-variate cross-attention to independent univariate forecasting, citing scalability and robustness concerns. Concurrently, Liu et al.~\cite{liu2026falconx} (Falcon-X) observed that Chronos-2 demonstrates near-identical error rates with and without group attention on GIFT-Eval, exhibiting attention map collapse across dissimilar inputs. While Falcon-X leveraged this single-benchmark finding to motivate a new architecture, whether Google's 330M-parameter $\tfm$ suffers from similar idling, how cross-channel attention behaves under controlled interventions, and whether its gains stem from genuine dynamic synchronization remain unknown. In the supervised regime, Abdelmalak et al.~\cite{abdelmalak2025lookback} and Han et al.~\cite{han2024capacity} demonstrated that channel-independent (CI) architectures frequently outperform channel-dependent (CD) models due to weak inter-channel dependence in standard benchmarks and capacity-robustness trade-offs under distribution shifts.
+Other evidence points the other way. Moirai 2.0~\cite{liu2025moirai2} drops
+the any-variate attention of its predecessor and forecasts each variate
+independently. Liu et al.~\cite{liu2026falconx} observe that Chronos-2
+produces almost identical forecasts on GIFT-Eval with and without group
+attention. For supervised models, channel independence is hard to
+beat~\cite{nie2023patchtst,zeng2023dlinear}; Han et
+al.~\cite{han2024capacity} attribute this to robustness under distribution
+drift, and Abdelmalak et al.~\cite{abdelmalak2025lookback} show that standard
+benchmarks carry weak inter-channel dependence. A higher rank for a
+multivariate TSFM is therefore consistent with two explanations: the model
+reads predictive information from other channels, or it profits from them in
+a way that does not depend on their content.
 
-These contradictory findings motivate a fundamental research inquiry: \textit{Does variate attention truly pay off in zero-shot foundation models, and what mechanisms govern its behavior?} To move beyond aggregate benchmark scores, we propose a within-model diagnostic probing framework evaluated on $\tfm$. Our study addresses four concrete research questions:
-\begin{enumerate}
-    \item \textbf{RQ1 (Benefit Profile)}: Does multivariate mode consistently outperform univariate mode across horizons and domains, or do domain-specific boundaries emerge?
-    \item \textbf{RQ2 (Mechanistic Attribution)}: Does the model actively extract synchronized temporal alignments, or does it merely rely on marginal statistics and shared diurnal phases?
-    \item \textbf{RQ3 (Theoretical Gap Closure)}: When ground-truth cross-channel couplings exist, how much theoretically available information does the zero-shot model capture relative to exact Kalman filter oracles?
-    \item \textbf{RQ4 (Channel Budget \& Efficiency)}: How does performance scale with the channel budget $K$, and how should channels be partitioned in high-dimensional database settings?
-\end{enumerate}
+Leaderboards cannot separate the two, because they compare different models
+over heterogeneous tasks. We probe one model from the inside. With the
+weights and the target channel fixed, we switch variate attention off and on,
+intervene on the context channels, and measure how accuracy and the forecast
+itself respond. We ask four questions.
+\textbf{RQ1} Where does the \MV{} mode help and where does it hurt?
+\textbf{RQ2} Which properties of the context channels does the gain rely on?
+\textbf{RQ3} On systems with known cross-channel information, how much of it
+does the model extract?
+\textbf{RQ4} How many channels, and which ones, should be supplied, and at
+what cost?
 
-\noindent\textbf{Contributions.} Our primary contributions are summarized as follows:
+\noindent Our contributions are:
 \begin{itemize}
-    \item \textbf{C1: Diagnostic Probing Protocol}: We introduce a unified evaluation protocol quantifying Benefit ($\Ben$), Reliance ($\Rel$), Sensitivity ($\Sen$), and Oracle Gap Closure ($\GC$) through paired interventions on identical windows.
-    \item \textbf{C2: Empirical Discovery of Domain Bimodality}: On 8 standard benchmarks across 4 horizons (Table~\ref{tab:ltsf_main}), we demonstrate that variate attention is not uniformly beneficial. It delivers steady gains on physical systems (e.g., Weather, Electricity) but suffers extreme degradation on high-frequency, non-stationary domains (Solar error degrades by $-31.95\%$).
-    \item \textbf{C3: Causal Mechanism Discovery}: Using 11 target-centric interventions, we prove that $\tfm$ possesses strict permutation invariance, relies heavily on micro-phase alignment (via IAAFT surrogates), and exhibits acute vulnerability to distractor noise channels.
-    \item \textbf{C4: Practical Channel Budget Guidelines}: We map the accuracy-latency Pareto frontier on an RTX 4090, proving that correlation-driven Top-$K$ channel selection capped at 32 variates preserves peak accuracy while halving inference latency.
+  \item A within-model probing protocol with four measures (benefit,
+        reliance, sensitivity, oracle gap closure), a set of interventions
+        with negative and positive controls, and paired bootstrap statistics
+        (Sect.~\ref{sec:method}).
+  \item Evidence on eight benchmarks and synthetic systems that the \MV{}
+        gain of \tfm{} is dataset-specific, depends on calendar-consistent
+        and recent context rather than step-level synchrony, and is partly
+        independent of cross-channel information (Sect.~\ref{sec:results}).
+  \item A cost analysis showing that the reference evaluator isolates
+        channels in blocks of 32, so extra channels add latency but no
+        information, and a set of data-engineering guidelines derived from
+        the measurements (Sect.~\ref{sec:guidelines}).
 \end{itemize}
 
-\section{Related Work}
-\label{sec:related}
+% =====================================================================
+\section{Background and Motivation}\label{sec:background}
 
-\subsection{Multivariate Time-Series Foundation Models}
-The progression of time-series foundation models has seen diverging architectural paradigms regarding variate interactions. Early architectures, including TimesFM~\cite{das2024timesfm} and Chronos~\cite{ansari2024chronos}, operated primarily under channel independence, treating multivariate series as decoupled batches of univariate signals. Recently, $\tfm$~\cite{timesfm3_blog2026} introduced full cross-variate attention layers interwoven after temporal self-attention in each of its 20 transformer layers, reporting improved aggregate rankings on benchmarks such as GIFT-Eval~\cite{gifteval2024}, fev-bench~\cite{fevbench2025}, and TIME~\cite{timebench2026}. Similarly, Chronos-2~\cite{ansari2025chronos2} introduced group attention across series sharing the same patch index, relying on synthetic multivariatization during pretraining.
+\subsubsection{\tfm.}
+\tfm{} is a 330M-parameter decoder with 20 layers. Each layer applies causal
+attention along time with rotary position embeddings, then attention across
+variates without position encoding, then a feed-forward block. The input is
+split into patches of 32 steps; the forecast horizon is appended as masked
+patches and decoded in a single forward pass. Every channel is normalized
+from the start of its context. Because variate attention carries no position
+information, the model is equivariant to the order of channels, which our
+control N1 confirms numerically (Sect.~\ref{sec:rq2}). In the \MV{} mode all
+channels in a forward pass are forecast jointly, and each serves both as a
+target and as context for the others; past-only covariates are handled in
+the same way. In the \UV{} mode each channel is processed alone.
 
-However, the efficacy of cross-channel modeling in foundation models remains contested. Moirai~\cite{woo2024moirai} adopted any-variate attention by flattening all variables into a single sequence with learned binary variate embeddings; yet its successor, Moirai-2.0~\cite{liu2025moirai2}, discarded cross-variate attention entirely, forecasting each variate independently to avoid negative transfer and scalability bottlenecks. Other architectures, such as Toto-2.0~\cite{garg2026toto2} and TiRex-2~\cite{carlsen2026tirex2}, explore asymmetric attention where targets attend to covariates without reciprocal connections. Crucially, Liu et al.~\cite{liu2026falconx} (Falcon-X) observed that Chronos-2 produces near-identical predictions on GIFT-Eval whether group attention is enabled or disabled, displaying attention map collapse across dissimilar inputs. While Falcon-X treated this observation as motivation to introduce an alternative architecture, our work establishes the first systematic within-model diagnostic probing framework for $\tfm$, dissecting when cross-variate attention provides genuine value, when it idles, and when it severely degrades predictions.
+\subsubsection{The 32-variate block.}
+The reference evaluator places at most 32 variates in one forward pass. For
+a dataset with more channels it forms consecutive blocks of 32 in column
+order and pads the last block by repeating channels. Electricity
+(321 channels) is thus processed as 11 independent blocks, and a channel
+attends only to the 31 other members of its block. ``Multivariate'' results
+on high-dimensional data therefore refer to a fixed, order-dependent
+grouping, not to attention over all channels. Sect.~\ref{sec:rq4} measures
+what this costs and what removing the cap changes.
 
-\subsection{Channel Independence vs. Channel Dependence Controversy}
-In the supervised time-series literature, the tension between channel-independent (CI) and channel-dependent (CD) modeling has sparked extensive debate. Landmark studies such as PatchTST~\cite{nie2023patchtst} and DLinear~\cite{zeng2023dlinear} demonstrated that simple CI architectures routinely outperform sophisticated cross-channel transformers (e.g., Informer~\cite{zhou2021informer}, Autoformer~\cite{wu2021autoformer}, FEDformer~\cite{zhou2022fedformer}). Although iTransformer~\cite{liu2024itransformer} revisited channel dependence by embedding entire univariate series as tokens, Han et al.~\cite{han2024capacity} established that CI models enjoy superior robustness under distribution drift, formalizing a capacity-robustness trade-off.
+\subsubsection{Why a within-model probe.}
+Comparisons between models confound variate attention with every other
+design choice, and attention weights need not explain
+predictions~\cite{jain2019attention}. Switching variate attention off inside
+one model and manipulating its inputs avoids both problems.
 
-Furthermore, Abdelmalak et al.~\cite{abdelmalak2025lookback} revealed that the apparent superiority of CI models on standard benchmarks stems from weak inter-channel Granger causality and untuned lookback windows; on standard benchmarks, CI won 21 out of 28 comparisons, whereas on coupled physical ODE systems, CD models won 18 out of 24. Song et al.~\cite{song2026cloc} introduced CLOC, demonstrating that channel communication must be dynamically regulated: channel suppression is optimal on ETT datasets, whereas local-global communication proves essential on Electricity and Solar. Similarly, CPiRi~\cite{cpiri2026} showed that supervised CD models easily overfit channel ordering, while LIFT~\cite{lift2024} highlighted that lead-lag relationships represent the primary source of cross-channel gain. Our study investigates whether these exact structural phenomena persist in zero-shot foundation models without task-specific training.
+% =====================================================================
+\section{Probing Methodology}\label{sec:method}
 
-\subsection{Probing and Interpretability in Time-Series}
-While diagnostic probing is well established in natural language processing and computer vision, its application to time-series foundation models remains in its infancy~\cite{zukowska2024longcontext,mtsf_survey2025}. A known limitation of analyzing raw attention maps is that attention weights do not necessarily reflect true causal explanations~\cite{jain2019attention}. To avoid this trap, we implement input-level causal perturbation protocols. Specifically, we leverage Iterative Amplitude Adjusted Fourier Transform (IAAFT) surrogates~\cite{schreiber1996surrogate} to randomize cross-channel phase spectra while strictly preserving autocorrelation and marginal amplitude distributions. In parallel, we introduce synthetic linear Gaussian state-space systems with exact analytical Kalman filter oracles, providing a mathematically grounded reference to quantify theoretical mutual information extraction.
+\subsection{Modes and Measures}
+For a test window $w$ and a target channel $i$, the model receives the
+target history and the histories of a set $\mathcal{C}_i$ of context
+channels and returns a forecast of length $H$. In the \UV{} mode
+$\mathcal{C}_i=\emptyset$; in the \MV{} mode $\mathcal{C}_i$ is the block
+that contains $i$. An intervention $\pi$ modifies only the channels in
+$\mathcal{C}_i$. We write $\hat y^{\UV}_{w,i}$, $\hat y^{\MV}_{w,i}$ and
+$\hat y^{\pi}_{w,i}$ for the three forecasts and $e(\cdot)$ for the mean
+squared error over the horizon on the standardized scale, and sum over all
+windows and targets, $E^{m}=\sum_{w,i} e(\hat y^{m}_{w,i})$.
 
-\section{Diagnostic Probing Framework}
-\label{sec:framework}
-
-\subsection{Probing Metrics}
-Let $\mathcal{W}$ denote the evaluation window set, $H$ the forecast horizon, and $i \in \{1, \dots, N\}$ the target variate index. For each window $w \in \mathcal{W}$ and target $i$, the model produces three forecast outputs: the univariate forecast $\hat{y}^{\UV}_{w,i}$, the standard multivariate forecast $\hat{y}^{\MV}_{w,i}$, and the perturbed multivariate forecast under intervention $\pi$, denoted $\hat{y}^{\pi}_{w,i}$. Let $e(\cdot)$ represent the normalized Mean Squared Error (MSE) evaluated over horizon $H$:
-\begin{equation}
-e(\hat{y}_{w,i}) = \frac{1}{H} \sum_{h=1}^H (y_{w,i,h} - \hat{y}_{w,i,h})^2.
+\emph{Benefit} measures whether the \MV{} mode helps:
+\begin{equation}\label{eq:benefit}
+  \Ben = \bigl(E^{\UV}-E^{\MV}\bigr)/E^{\UV}.
 \end{equation}
-
-\noindent\textbf{Benefit ($\Ben$).} We define the aggregate relative benefit of multivariate mode over univariate mode as:
-\begin{equation}
-\Ben = \frac{\sum_{w,i} e(\hat{y}^{\UV}_{w,i}) - \sum_{w,i} e(\hat{y}^{\MV}_{w,i})}{\sum_{w,i} e(\hat{y}^{\UV}_{w,i})} \times 100\%.
+\emph{Reliance} measures how much of the benefit an intervention removes:
+\begin{equation}\label{eq:reliance}
+  \Rel_\pi = \bigl(E^{\pi}-E^{\MV}\bigr)/\bigl(E^{\UV}-E^{\MV}\bigr).
 \end{equation}
-A positive value $\Ben > 0$ indicates beneficial cross-variate communication, whereas $\Ben < 0$ denotes negative transfer. To ensure robustness against outlier windows, we also monitor the median relative change across windows.
-
-\noindent\textbf{Reliance ($\Rel_\pi$).} To causally attribute the multivariate gain under an intervention $\pi$, we define Reliance as:
-\begin{equation}
-\Rel_\pi = \frac{e(\hat{y}^{\pi}_{w,i}) - e(\hat{y}^{\MV}_{w,i})}{e(\hat{y}^{\UV}_{w,i}) - e(\hat{y}^{\MV}_{w,i})}.
+$\Rel_\pi\approx 0$ means that the benefit does not depend on what $\pi$
+destroys, $\Rel_\pi\approx 1$ that it disappears, and $\Rel_\pi>1$ that the
+corrupted context makes the forecast worse than no context. Errors are summed
+before the ratio is taken because per-window ratios are unstable when the
+two modes perform alike. $\Rel_\pi$ is reported only when the confidence
+interval of a positive $\Ben$ excludes zero; otherwise we report the relative
+error change $\Delta_\pi=(E^{\pi}-E^{\MV})/E^{\MV}$. \emph{Sensitivity}
+$\Sen_\pi=\operatorname{mean}_{w,i,h}|\hat y^{\pi}_{w,i,h}-\hat y^{\MV}_{w,i,h}|$
+on the standardized scale measures how far the forecast moves, regardless of
+accuracy. On synthetic linear Gaussian systems, a Kalman filter with the true
+parameters that observes only the target, or all channels, gives the errors
+$e^{\UV}_\star$ and $e^{\MV}_\star$. \emph{Gap closure}
+\begin{equation}\label{eq:gc}
+  \GC = \bigl(E^{\UV}-E^{\MV}\bigr)/\bigl(E^{\UV}_\star-E^{\MV}_\star\bigr)
 \end{equation}
-When $\Ben > 0$, $\Rel_\pi \approx 1$ signifies that intervention $\pi$ completely erased the multivariate advantage, proving that the model relies entirely on the corrupted feature. Conversely, $\Rel_\pi \approx 0$ indicates that the advantage is invariant to the perturbation, while $\Rel_\pi > 1$ reveals that the corrupted context actively misleads the model beyond univariate error levels. In regimes where the denominator $|e(\hat{y}^{\UV}) - e(\hat{y}^{\MV})|$ approaches zero, we report the unnormalized error shift $\Delta e_\pi = e(\hat{y}^{\pi}) - e(\hat{y}^{\MV})$ to avoid numerical instability.
+is the share of the available cross-channel improvement the model realizes.
+We compute $\GC$ only when the oracle gap
+$(E^{\UV}_\star-E^{\MV}_\star)/E^{\UV}_\star$ is at least 5\%, since smaller
+gaps make the ratio unstable.
 
-\noindent\textbf{Sensitivity ($\Sen_\pi$).} Independent of ground-truth target values, sensitivity measures the magnitude of output perturbation induced by modifying context channels:
-\begin{equation}
-\Sen_\pi = \frac{1}{|\mathcal{W}| N} \sum_{w \in \mathcal{W}} \sum_{i=1}^N \frac{\frac{1}{H}\sum_{h=1}^H |\hat{y}^{\pi}_{w,i,h} - \hat{y}^{\MV}_{w,i,h}|}{\sigma_i},
-\end{equation}
-where $\sigma_i$ is the empirical standard deviation of variate $i$ across the training set. Similarly, $\Sen_{\UV}$ computes the normalized distance between $\hat{y}^{\UV}$ and $\hat{y}^{\MV}$.
-
-\noindent\textbf{Oracle Gap Closure ($\GC$).} On synthetic datasets generated by linear Gaussian state-space systems with known system parameters, we evaluate the theoretical minimum MSE under the analytical univariate Kalman oracle ($e^{\UV}_\star$) and the omniscient multivariate Kalman oracle ($e^{\MV}_\star$). Gap Closure is defined as:
-\begin{equation}
-\GC = \frac{e(\hat{y}^{\UV}_{\text{model}}) - e(\hat{y}^{\MV}_{\text{model}})}{e^{\UV}_\star - e^{\MV}_\star}.
-\end{equation}
-$\GC = 1.0$ indicates that the zero-shot model extracts $100\%$ of the theoretically available cross-channel mutual information. $\GC \approx 0$ indicates complete failure to extract coupling signals, and $\GC < 0$ reflects severe structural distortion.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig1_four_quadrant.pdf}
-\caption{Four-Quadrant diagnostic mapping of cross-variate attention across benchmark datasets and horizons. Quadrant I reflects beneficial extraction, Quadrant II indicates unexploited dependence, Quadrant III represents neutral independence, and Quadrant IV highlights catastrophic negative transfer.}
-\label{fig:four_quadrant}
-\end{figure}
-
-\subsection{Target-Centric Causal Interventions}
-To isolate the exact temporal and statistical properties extracted by variate attention, we enforce a strict target-centric principle: the target series $x_i(1:L)$ is kept completely untouched, while structured perturbations $\pi$ are applied exclusively to context channels $x_j(1:L)$ for all $j \neq i$. We design 11 targeted interventions:
-
-\noindent\textbf{Negative Controls (Sanity Checks):}
-\begin{itemize}
-    \item \textbf{N1 (Permute)}: Randomly permute the channel ordering $\tilde{x}_j = x_{\sigma(j)}$. If variate attention is permutation-equivariant, $\Sen_{\text{N1}} \approx 0$.
-    \item \textbf{N2 (Duplicate)}: Append an exact duplicate of the target series $\tilde{x}_{N+1} = x_i$ into the context set.
-    \item \textbf{N3 (Lagged Copy)}: Append a shifted self-replica $\tilde{x}_{N+1}(t) = x_i(t - 16)$.
-    \item \textbf{N4 (Distractor Noise)}: Replace context channels with Gaussian noise matching empirical statistics: $\tilde{x}_j(t) \sim \mathcal{N}(\mu_j, \sigma_j^2)$. Tests whether the model possesses soft-masking capabilities against uninformative channels.
-\end{itemize}
-
-\noindent\textbf{Destructive De-alignment Interventions:}
-\begin{itemize}
-    \item \textbf{I1 (Time Shuffle)}: Independently permute the temporal order of each context channel: $\tilde{x}_j(t) = x_j(\tau(t))$. Destroys both temporal autocorrelation and cross-channel covariance.
-    \item \textbf{I2 (Unaligned Segment)}: Replace context channels with segments extracted from the same dataset recorded at least 30 days apart without calendar alignment: $\tilde{x}_j(t) = x_j(t + \Delta), |\Delta| \ge 30\text{ days}$.
-    \item \textbf{I3 (Calendar-Aligned Segment)}: Replace context channels with segments shifted by integer multiples of weeks: $\tilde{x}_j(t) = x_j(t + k \cdot T_{\text{week}})$. Preserves diurnal and weekly seasonal cycles while breaking contemporaneous event-driven synchronization.
-    \item \textbf{I4 (IAAFT Phase Surrogates)}: Apply Iterative Amplitude Adjusted Fourier Transform~\cite{schreiber1996surrogate} to randomize the Fourier phase spectrum while strictly matching the original power spectrum and empirical marginal distribution. Isolates instantaneous phase alignment from static marginal statistics.
-    \item \textbf{I6 (Lag Shifts)}: Circularly shift context channels by $\delta \in \{1, 4, 24, 168\}$ time steps: $\tilde{x}_j(t) = x_j(t - \delta)$.
-\end{itemize}
-
-\noindent\textbf{Positive Control:}
-\begin{itemize}
-    \item \textbf{P1 (Leading Indicator)}: Inject a synthetic channel containing the target's future trajectory corrupted by slight Gaussian observation noise: $\tilde{x}_{\text{lead}}(t) = x_i(t + k) + \varepsilon_t$, with lead $k \in \{16, 32\}$ and $\varepsilon_t \sim \mathcal{N}(0, 0.05 \sigma_i^2)$. Verifies whether variate attention has the representational capacity to route predictive signals when genuine leads exist.
-\end{itemize}
-
-\subsection{Synthetic State-Space Generator and Kalman Oracles}
-To establish ground-truth bounds on cross-channel information extraction, we construct a controllable linear Gaussian state-space generator (G1):
-\begin{align}
-z_t &= A z_{t-1} + \eta_t, \quad \eta_t \sim \mathcal{N}(0, Q), \\
-x_t &= C z_t + \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, R),
-\end{align}
-where $z_t \in \mathbb{R}^r$ represents a low-rank latent state vector ($r \in \{1, 2, 4\}$) and $x_t \in \mathbb{R}^N$ represents the observed multi-channel time series ($N=8$). The state transition matrix is defined as $A = \operatorname{diag}(\alpha_1, \dots, \alpha_r)$ with persistent autoregressive coefficients $\alpha_k \in [0.80, 0.95]$. The observation matrix is structured as:
-\begin{equation}
-C = \gamma C_0 + (1 - \gamma) I_{N \times r},
-\end{equation}
-where $C_0 \sim \mathcal{N}(0, 1)$ generates dense inter-channel cross-talk, and $\gamma \in [0, 1]$ directly parameterizes cross-channel coupling strength.
-
-\noindent\textbf{Kalman Filter Oracles.} Because the true generative parameters $(A, C, Q, R)$ are known, we derive exact minimum mean-square error estimators:
-\begin{itemize}
-    \item \textbf{Multivariate Kalman Oracle ($e^{\MV}_\star$)}: Runs standard Kalman filtering updates conditioning on all observed channels $x_{1:t}$, yielding the filtered state estimate $\hat{z}_{t|t}$ and optimal $H$-step multi-step forecasts $\hat{x}_{t+h|t} = C A^h \hat{z}_{t|t}$.
-    \item \textbf{Univariate Kalman Oracle ($e^{\UV}_\star$)}: Runs Kalman filtering conditioning exclusively on the scalar history of the target variate $x_{i, 1:t}$, projecting the marginal state uncertainty.
-\end{itemize}
-
-\section{Experimental Setup}
-\label{sec:setup}
-
-\subsection{Target Model Architecture}
-We probe Google's official $\tfm$ checkpoint (330M parameters). The model comprises 20 transformer layers with hidden dimensionality $d_{\text{model}} = 1280$ and 16 attention heads. Each layer sequentially executes: (1) causal temporal self-attention utilizing Rotary Position Embeddings (RoPE) along the time axis, (2) non-causal cross-variate attention without position embeddings (\texttt{use\_rope\_var: false}), and (3) a feed-forward network. Context series are normalized per channel via Reversible Instance Normalization (RevIN)~\cite{kim2021revin}. Input series are tokenized via Contiguous Patch Masking with a non-overlapping patch length of $P = 32$ time steps. Forecasting is performed in a non-autoregressive single-pass forward step.
-
-\subsection{Benchmark Datasets and Pretraining Leakage Audit}
-We conduct evaluations across 8 canonical LTSF benchmarks: ETTh1, ETTh2, ETTm1, ETTm2, Weather, Electricity, Solar-Energy, and Traffic. The dataset specifications are summarized in Table~\ref{tab:dataset_overview}. We adhere strictly to standard train, validation, and test temporal splits ($7:1:2$ for ETT and Weather; $12:4:4$ months for Electricity, Solar, and Traffic). Testing is conducted across four forecasting horizons $H \in \{96, 192, 336, 720\}$ with fixed context length $L = 512$, totaling 9,600 distinct evaluation windows.
+\subsection{Interventions and Controls}
+Table~\ref{tab:interventions} lists the interventions. Negative controls
+must leave the forecast (N1) or its accuracy (N2, N3) unchanged, because
+they add no information the target does not already carry. The positive
+control P1 appends a noisy copy of the target's future (noise standard
+deviation $0.1\,\sigma_i$, where $\sigma_i$ is the standard deviation of the
+target's context) and must reduce the
+error; it shows that the protocol can detect cross-channel use when it
+exists. I1--I5 each remove one property of the context: temporal order,
+alignment, calendar phase, or cross-channel phase relations. Comparing I2 with
+I3 separates alignment from calendar phase: both replace the context with
+history of the same channels that is at least 30 days old, but only I3 keeps
+the hour of the week. Circular shifts (I5) misalign the true context by a
+controlled amount; we discard a shift when it exceeds the context length
+(one week at 10-minute resolution).
 
 \begin{table}[t]
-\centering
-\caption{Overview of LTSF benchmark datasets evaluated in diagnostic probing.}
-\label{tab:dataset_overview}
-\footnotesize
-\setlength{\tabcolsep}{5.0pt}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Dataset} & \textbf{Freq} & $N$ & $L$ & \textbf{Horizons} & \textbf{Domain} \\
-\midrule
-ETTh1 & 1 hour & 7 & 512 & 96--720 & Power Grid \\
-ETTh2 & 1 hour & 7 & 512 & 96--720 & Power Grid \\
-ETTm1 & 15 min & 7 & 512 & 96--720 & Power Grid \\
-ETTm2 & 15 min & 7 & 512 & 96--720 & Power Grid \\
-Weather & 10 min & 21 & 512 & 96--720 & Climatology \\
-Electricity & 1 hour & 321 & 512 & 96--720 & Energy Usage \\
-Solar-Energy & 10 min & 137 & 512 & 96--720 & Photovoltaic \\
-Traffic & 1 hour & 862 & 512 & 96--720 & Transportation \\
-\bottomrule
-\end{tabular}
+  \centering
+  \caption{Interventions on the context channels $\mathcal{C}_i$. The target
+  channel is never modified. Steps are dataset steps (1\,h for ETTh1 and
+  Electricity, 10\,min for Weather and Solar-Energy);
+  $\varepsilon\sim\mathcal{N}(0,(0.1\sigma_i)^2)$.}
+  \label{tab:interventions}
+  \setlength{\tabcolsep}{4pt}
+  \small
+  \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{3.1cm}@{}}
+    \toprule
+    ID & Operation on $\mathcal{C}_i$ & Removes \\
+    \midrule
+    N1 & permute the channels                         & nothing \\
+    N2 & add a copy of the target                     & nothing new \\
+    N3 & add the target lagged by 16 steps            & nothing new \\
+    N4 & replace by Gaussian noise, matched moments   & all information \\
+    I1 & shuffle time steps within each channel       & temporal order \\
+    I2 & same channels, 30 days and 7 steps earlier   & alignment, calendar phase \\
+    I3 & same channels, whole weeks earlier ($\ge$30 days) & alignment \\
+    I4 & IAAFT surrogate~\cite{schreiber1996surrogate} of each channel & cross-channel phase \\
+    I5 & circular shift by 1 step, 1\,h, 1 day, 1 week & alignment at that scale \\
+    P1 & add $x(t)=y_i(t+k)+\varepsilon$, $k\in\{16,32\}$ steps, 1\,h, 6\,h & --- (positive control) \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-\noindent\textbf{Pretraining Data Leakage Audit.} Foundation model evaluations must account for potential pretraining data contamination. We cross-referenced the open Salesforce GiftEvalPretrain inventory~\cite{gifteval2024} utilized during $\tfm$'s pretraining corpus construction. Notably, the repository contains extensive PeMS sensor telemetry (including PEMS03, PEMS04, PEMS07, PEMS08, PEMS\_BAY, and \texttt{traffic\_hourly}, which comprises the identical 862 PeMS road occupancy sensors as LTSF Traffic). Consequently, Traffic must be interpreted with caution as an exposed domain. In contrast, ETTh1/2, ETTm1/2, and Weather are entirely absent from GiftEvalPretrain, providing guaranteed zero-shot clean testbeds.
+\subsection{Synthetic Systems and Oracles}
+To test whether the model extracts information that is known to exist, we
+generate linear Gaussian state-space systems in which each channel follows
+its own autoregressive and seasonal dynamics and, depending on the
+generator, receives input from shared factors (G1), local blocks (G2),
+factors whose loadings drift (G3), or a leading channel with lag
+$\ell\in\{1,8,16,32,64\}$ and coefficient 0.8 (G5). G6 has independent
+channels and thus no cross-channel information. The oracles are Kalman
+filters with the true parameters.
 
-\subsection{The 32-Variate Sequential Chunking Mechanism}
-A critical engineering discovery from inspecting $\tfm$'s official evaluation implementation (\texttt{torch/evaluator.py}) is the presence of a hardcoded parameter:
-\begin{equation}
-\texttt{\_MAX\_VARIATES\_PER\_FORWARD} = 32.
-\end{equation}
-When the number of target channels exceeds 32, the official evaluator does not perform all-to-all attention across all $N$ channels. Instead, it sequentially partitions the dataset into chunks of 32 channels based strictly on the arbitrary column ordering of the dataset CSV. The final chunk is padded to 32 by wrapping around and repeating the initial channels. For Traffic ($N=862$), evaluation decomposes into $\lceil 862 / 32 \rceil = 27$ independent forward chunks. Thus, global cross-variate attention across all sensors never actually occurs in standard benchmark pipelines.
+\subsection{Statistics}
+All comparisons are paired: \UV, \MV{} and intervened forecasts use the same
+windows and targets. We report 95\% confidence intervals from 2{,}000 block
+bootstrap resamples of windows, which respects the overlap between
+neighboring windows. The bootstrap tests the ratio of summed errors; we
+additionally apply the Wilcoxon signed-rank test to per-window error
+differences, which tests the median, and correct for multiple comparisons with
+the Holm procedure within each experiment. We call a result significant only
+when the Holm-adjusted $p$-value is below 0.05.
 
-\subsection{Hardware and Execution Protocols}
-All experiments are executed on a dedicated workstation equipped with an NVIDIA RTX 4090 GPU (24GB GDDR6X VRAM), AMD Ryzen 9 processor, and PyTorch 2.4 under CUDA 12.4. Inference is conducted strictly in FP32 precision. To prevent clipping normalized data, we explicitly set \texttt{make\_positive = False}.
+% =====================================================================
+\section{Empirical Findings}\label{sec:results}
 
-\section{Diagnostic Results and Empirical Findings}
-\label{sec:results}
+\subsection{Setup}\label{sec:setup}
+We use ETTh1, ETTh2, ETTm1, ETTm2 (7 channels each), Weather (21),
+Solar-Energy (137), Electricity (321) and Traffic (862) with the standard
+chronological splits (12/4/4 months for ETT, 7:1:2 otherwise),
+standardization with training statistics, and a context of 512 steps. The
+public GIFT-Eval pretraining corpus~\cite{gifteval2024} contains
+\texttt{traffic\_hourly}, which covers the same 862 sensors as Traffic, and
+the PeMS datasets; because we cannot rule out that \tfm{} was pretrained on
+this corpus, we mark Traffic as potentially exposed ($^\dagger$). The corpus
+contains none of the ETT datasets. We use the public 330M checkpoint in FP32
+on one RTX 4090 (PyTorch 2.8, CUDA 12.8) with the evaluator's default
+symmetric averaging, disable the clamping of forecasts at zero (it would bias
+standardized data), and fix the seed to 42; all results come from one
+code version.\footnote{Commit \texttt{b06beb7} of the anonymized repository.} Unless stated otherwise, the \MV{}
+mode follows the 32-variate blocks of the reference evaluator.
+RQ1 uses 300 test windows per dataset and horizons
+$H\in\{96,192,336,720\}$ (9{,}600 window--horizon pairs). RQ2 uses 100
+windows at $H=96$ on ETTh1 (7 targets), Weather (21), Electricity and
+Solar-Energy (64 targets each, two blocks of 32). RQ4 uses $H=96$, 50
+windows and 64 stratified-sampled targets per dataset, i.e.\ 3{,}200
+forecasts per strategy and budget.
 
-\subsection{RQ1: Benefit Profile and Domain Bimodality}
+% ---------------------------------------------------------------------
+\subsection{RQ1: Where Does the \MV{} Mode Help?}\label{sec:rq1}
 
-\begin{table}[!t]
-\centering
-\caption{Multivariate ($\MV$) vs. Univariate ($\UV$) performance across LTSF benchmarks and horizons. Bold values indicate superior performance; $\Ben$ denotes relative benefit (\%).}
-\label{tab:ltsf_main}
-\footnotesize
-\setlength{\tabcolsep}{4.2pt}
-\renewcommand{\arraystretch}{0.92}
-\begin{tabular}{llccccc}
-\toprule
-\textbf{Dataset} & $H$ & \multicolumn{2}{c}{\textbf{Univariate ($\UV$)}} & \multicolumn{2}{c}{\textbf{Multivariate ($\MV$)}} & \textbf{Gain $\Ben$} \\
-\cmidrule(lr){3-4} \cmidrule(lr){5-6}
-& & \textbf{MSE} & \textbf{MAE} & \textbf{MSE} & \textbf{MAE} & (\%) \\
-\midrule
-ETTh1 & 96 & 0.371  & 0.368  &  \textbf{0.371} &  \textbf{0.366} & +0.08\% \\
-ETTh1 & 192 & 0.401  & 0.386  &  \textbf{0.396} &  \textbf{0.384} & +1.13\% \\
-ETTh1 & 336 & 0.408  & 0.398  &  \textbf{0.394} &  \textbf{0.394} & +3.56\% \\
-ETTh1 & 720 & 0.436  & \textbf{0.429}  &  \textbf{0.430} &  0.430 & +1.35\% \\
-\midrule
-ETTh2 & 96 & 0.244  & 0.297  &  \textbf{0.229} &  \textbf{0.288} & +6.21\% \\
-ETTh2 & 192 & 0.304  & 0.340  &  \textbf{0.283} &  \textbf{0.328} & +6.90\% \\
-ETTh2 & 336 & 0.343  & 0.374  &  \textbf{0.319} &  \textbf{0.360} & +7.20\% \\
-ETTh2 & 720 & 0.422  & 0.433  &  \textbf{0.397} &  \textbf{0.418} & +5.99\% \\
-\midrule
-ETTm1 & 96 & 0.293  & 0.323  &  \textbf{0.292} &  \textbf{0.321} & +0.27\% \\
-ETTm1 & 192 & \textbf{0.331}  & 0.349  &  0.336 &  \textbf{0.348} & -1.36\% \\
-ETTm1 & 336 & \textbf{0.368}  & 0.372  &  0.380 &  \textbf{0.371} & -3.13\% \\
-ETTm1 & 720 & \textbf{0.454}  & 0.413  &  0.463 &  \textbf{0.413} & -1.92\% \\
-\midrule
-ETTm2 & 96 & \textbf{0.178}  & \textbf{0.243}  &  0.180 &  0.243 & -0.90\% \\
-ETTm2 & 192 & \textbf{0.254}  & 0.292  &  0.254 &  \textbf{0.292} & -0.07\% \\
-ETTm2 & 336 & 0.323  & 0.336  &  \textbf{0.321} &  \textbf{0.334} & +0.79\% \\
-ETTm2 & 720 & \textbf{0.440}  & 0.402  &  0.441 &  \textbf{0.398} & -0.18\% \\
-\midrule
-electricity & 96 & 0.116  & 0.210  &  \textbf{0.113} &  \textbf{0.208} & +2.60\% \\
-electricity & 192 & 0.136  & 0.229  &  \textbf{0.133} &  \textbf{0.226} & +2.21\% \\
-electricity & 336 & 0.158  & 0.248  &  \textbf{0.154} &  \textbf{0.245} & +2.13\% \\
-electricity & 720 & 0.204  & 0.285  &  \textbf{0.198} &  \textbf{0.281} & +2.86\% \\
-\midrule
-solar & 96 & \textbf{0.209}  & \textbf{0.202}  &  0.225 &  0.207 & -7.72\% \\
-solar & 192 & \textbf{0.240}  & \textbf{0.222}  &  0.270 &  0.234 & -12.68\% \\
-solar & 336 & \textbf{0.270}  & \textbf{0.242}  &  0.326 &  0.268 & -20.63\% \\
-solar & 720 & \textbf{0.304}  & \textbf{0.263}  &  0.401 &  0.300 & -31.95\% \\
-\midrule
-traffic & 96 & 0.343  & \textbf{0.214}  &  \textbf{0.339} &  0.215 & +1.22\% \\
-traffic & 192 & 0.362  & \textbf{0.225}  &  \textbf{0.359} &  0.226 & +0.58\% \\
-traffic & 336 & 0.378  & \textbf{0.235}  &  \textbf{0.375} &  0.235 & +0.86\% \\
-traffic & 720 & 0.429  & 0.260  &  \textbf{0.423} &  \textbf{0.260} & +1.40\% \\
-\midrule
-weather & 96 & 0.167  & 0.195  &  \textbf{0.153} &  \textbf{0.183} & +8.04\% \\
-weather & 192 & 0.223  & 0.245  &  \textbf{0.216} &  \textbf{0.241} & +3.11\% \\
-weather & 336 & 0.303  & 0.296  &  \textbf{0.299} &  \textbf{0.296} & +1.30\% \\
-weather & 720 & 0.509  & 0.378  &  \textbf{0.480} &  \textbf{0.373} & +5.76\% \\
-\bottomrule
-\end{tabular}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig1_benefit.pdf}
+  \caption{Benefit $\Ben$ of the \MV{} over the \UV{} mode with 95\% block
+  bootstrap intervals, 300 windows per dataset. Positive values favor the
+  \MV{} mode. $^\dagger$Potentially seen in pretraining.}
+  \label{fig:benefit}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{\tfm{} in \UV{} and \MV{} mode. MSE is averaged over the four
+  horizons; $\Ben$ (\%) is given per horizon. \sig: 95\% bootstrap interval
+  excludes zero; \textbf{bold}: Holm-adjusted Wilcoxon $p<0.05$. Source:
+  \texttt{e1\_ltsf\_sampled.csv}.}
+  \label{tab:ltsf}
+  \setlength{\tabcolsep}{4.2pt}
+  \small
+  \begin{tabular}{@{}lrccrrrr@{}}
+    \toprule
+    & & \multicolumn{2}{c}{Mean MSE} & \multicolumn{4}{c}{$\Ben$ (\%) at horizon $H$} \\
+    \cmidrule(lr){3-4}\cmidrule(l){5-8}
+    Dataset & $N$ & \UV & \MV & 96 & 192 & 336 & 720 \\
+    \midrule
+    ETTh1                &   7 & 0.404 & 0.398 & $+0.08$ & $+1.21$ & $+3.56$\sig & $+1.35$ \\
+    ETTh2                &   7 & 0.329 & 0.307 & $\mathbf{+6.21}$\sig & $\mathbf{+6.86}$\sig & $\mathbf{+7.20}$\sig & $+5.99$\sig \\
+    ETTm1                &   7 & 0.362 & 0.368 & $+0.27$ & $-1.39$ & $-3.13$ & $-1.92$ \\
+    ETTm2                &   7 & 0.299 & 0.299 & $-0.90$ & $-0.12$ & $+0.79$ & $-0.18$ \\
+    Weather              &  21 & 0.301 & 0.287 & $\mathbf{+8.04}$\sig & $\mathbf{+3.06}$\sig & $+1.30$ & $+5.76$ \\
+    Electricity          & 321 & 0.153 & 0.150 & $\mathbf{+2.60}$\sig & $\mathbf{+2.24}$\sig & $\mathbf{+2.13}$\sig & $\mathbf{+2.86}$\sig \\
+    Traffic$^\dagger$    & 862 & 0.378 & 0.374 & $+1.22$\sig & $\mathbf{+0.61}$ & $\mathbf{+0.86}$\sig & $\mathbf{+1.40}$\sig \\
+    Solar-Energy         & 137 & 0.256 & 0.306 & $-7.72$ & $-12.88$ & $\mathbf{-20.63}$\sig & $\mathbf{-31.95}$\sig \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-\noindent\textbf{Finding 1. Cross-variate attention displays distinct domain bimodality rather than universal dominance.}
-Table~\ref{tab:ltsf_main} presents the comparative evaluation between univariate ($\UV$) and multivariate ($\MV$) modes across 32 benchmark configurations. The empirical evidence demonstrates that variate attention is not universally beneficial:
-\begin{enumerate}
-    \item \textbf{Physical Infrastructure and Climatology}: On Weather and Electricity, multivariate attention consistently reduces forecasting error. On Weather, error reductions reach $+8.04\%$ at $H=96$ ($0.167 \to 0.153$ MSE) and $+5.76\%$ at $H=720$. On Electricity, multivariate attention delivers steady gains ranging from $+2.13\%$ to $+2.86\%$ across all horizons. Paired Wilcoxon signed-rank tests across evaluation windows confirm that these improvements are statistically significant ($p < 10^{-4}$).
-    \item \textbf{Catastrophic Degradation on Solar-Energy}: In sharp contrast, Solar-Energy exhibits severe performance degradation under multivariate mode. Crucially, the error penalty compounds monotonically across the forecast horizon: from $-7.72\%$ at $H=96$ ($0.209 \to 0.225$) to $-12.68\%$ at $H=192$, $-20.63\%$ at $H=336$, and culminating in a $-31.95\%$ degradation at $H=720$ ($0.304 \to 0.401$ MSE, $p < 10^{-5}$). In solar photovoltaic arrays, inter-sensor variations are dominated by fast-moving localized cloud transients, meaning that cross-channel attention routes non-stationary high-frequency noise that derails long-term rollouts.
-    \item \textbf{Neutrality on High-Frequency Industrial Telemetry}: On ETTm1 and ETTm2 (15-minute sampling), multivariate mode offers negligible benefit ($\Ben \in [-3.13\%, +0.79\%]$). At $H=336$ on ETTm1, multivariate attention degrades MSE by $-3.13\%$. This confirms Hypothesis H1: variate attention acts as a double-edged sword, excelling in smooth physical dynamical systems while degrading in high-frequency, noisy domains.
-\end{enumerate}
+Figure~\ref{fig:benefit} and Table~\ref{tab:ltsf} show that the effect of
+the \MV{} mode depends on the dataset, and within a dataset on the horizon.
 
-\subsection{RQ2: Mechanistic Attribution via Causal Interventions}
+\paragraph{Consistent gains.} ETTh2 gains 6.0--7.2\% at every horizon.
+Weather gains 8.04\% at $H=96$ (MSE $0.167\to0.153$, Holm-adjusted
+$p=5.4\times10^{-10}$) and 3.06\% at $H=192$; at longer horizons the point
+estimates stay positive but the intervals include zero. Electricity gains
+2.13--2.86\% with narrow intervals at every horizon (e.g.\ $+2.60\%$
+\ci{1.61}{3.60} at $H=96$, Holm-adjusted $p=8.5\times10^{-20}$), and the
+per-window median gain is also 2.2--2.5\%, so the gain is spread over most
+windows. Traffic gains 0.6--1.4\% in MSE, but its MAE and pinball loss change
+by less than 0.4\% in either direction, and it may have been seen in
+pretraining.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig2_interventions.pdf}
-\caption{Reliance metric $\Rel_\pi$ across negative controls, destructive de-alignments, and positive controls on Weather, ETTh1, and Electricity.}
-\label{fig:interventions}
-\end{figure}
+\paragraph{No effect.} On ETTh1, ETTm1 and ETTm2, 11 of the 12 intervals
+include zero and none of the Wilcoxon tests is significant. For the
+15-minute ETT datasets the point estimates are mostly negative (ETTm1:
+$-3.13\%$ at $H=336$), which agrees with the observation of Song et
+al.~\cite{song2026cloc} that suppressing channel communication suits the ETT
+data.
 
-\noindent\textbf{Finding 2. The architecture is strictly permutation-invariant and relies on micro-phase alignment rather than static feature pooling.}
-Figure~\ref{fig:interventions} illustrates the Reliance metric $\Rel_\pi$ across the 11 targeted interventions:
-\begin{enumerate}
-    \item \textbf{Verification of Permutation Equivariance}: Under channel permutation (N1), $\tfm$ displays zero reliance ($\Rel \approx 0$) and near-zero output sensitivity ($\Sen < 8.5 \times 10^{-8}$) across all datasets. This empirically verifies that omitting rotary embeddings on the variate axis (\texttt{use\_rope\_var: false}) achieves exact permutation equivariance.
-    \item \textbf{Micro-Phase Alignment vs. Seasonal Pooling}: On Weather, replacing context series with calendar-aligned segments (I3) preserves the multivariate advantage ($\Rel = -1.18$, MSE $= 0.1601$). However, applying IAAFT phase surrogates (I4) catastrophically destroys performance, yielding $\Rel = 1.33$ and inflating MSE to $0.2284$ (surpassing the univariate baseline of $0.2194$). Because IAAFT surrogates preserve the identical power spectrum and marginal distribution while randomizing Fourier phase angles, this result proves that $\tfm$ actively tracks instantaneous, phase-locked physical transitions across channels rather than aggregating static diurnal statistics.
-\end{enumerate}
+\paragraph{Horizon-growing loss on Solar-Energy.} The \MV{} mode raises the
+error by 7.72\%, 12.88\%, 20.63\% and 31.95\% at the four horizons (MSE
+$0.304\to0.401$ at $H=720$, Holm-adjusted $p=1.1\times10^{-12}$). The loss is
+driven by a minority of windows: at $H=96$ the median window is 7.64\%
+\emph{better} in the \MV{} mode, while the summed error is 7.72\% worse; by
+$H=720$ the median window is also worse ($-18.12\%$). Solar-Energy is the
+dataset on which the model's use of other channels is most costly, and we
+return to it in RQ2 and RQ4.
 
-\noindent\textbf{Finding 3. Contextual noise severely misleads predictions, whereas leading indicators unlock dramatic accuracy gains.}
-Under distractor Gaussian noise injection (N4), Weather MSE inflates by $+20.1\%$ from $0.1923$ to $0.2309$ ($\Rel = 1.07$). This reveals that $\tfm$ lacks autonomous channel-filtering capabilities; uninformative context channels dilute attention weights and corrupt target representations. Conversely, providing a 16-step leading indicator (P1) reduces Weather MSE to $0.1731$ (an $18.6\%$ error drop, $\Rel = -0.24$). This confirms Hypothesis H6: variate attention possesses the latent representational capacity to route predictive causal signals when genuine leads exist.
+\paragraph{Answer to RQ1.} The \MV{} mode helps on Weather, ETTh2 and
+Electricity, has no detectable effect on ETTh1, ETTm1 and ETTm2, and hurts on
+Solar-Energy by an amount that grows with the horizon. The sampling rate does not
+predict the sign: Weather and Solar-Energy are both 10-minute data.
 
-\subsection{RQ3: Controllable Dynamics and Kalman Oracle Gap Closure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig3_synthetic_gc.pdf}
-\caption{Oracle Gap Closure $\GC$ on synthetic linear Gaussian state-space generators (G1) across coupling strengths $\gamma$ and latent factor ranks $r \in \{1, 2, 4\}$.}
-\label{fig:synthetic_gc}
-\end{figure}
-
-\noindent\textbf{Finding 4. Zero-shot foundation models close theoretical oracle gaps under structured low-rank couplings.}
-Figure~\ref{fig:synthetic_gc} presents the Gap Closure metric $\GC$ evaluated against analytical Kalman filter oracles on state-space model G1.
-When latent states have rank $r \in \{2, 4\}$ and inter-channel coupling is moderate to strong ($\gamma \ge 0.50$), $\tfm$ achieves robust positive gap closure ($\GC \in [0.36, 1.53]$), closing up to $152\%$ of the gap between univariate and multivariate Kalman oracles.
-However, when the latent state rank is 1 or coupling is weak ($\gamma \le 0.25$), $\GC$ collapses to negative values (e.g., $\GC = -7.35$ at $\gamma=0$). This proves that zero-shot variate attention requires sufficiently rich multi-channel low-rank coordination to outperform univariate state estimation, faltering when independent noise dominates cross-series covariance.
-
-\subsection{RQ4: Channel Budget $K$, Selection Strategies, and Hardware Latency}
+% ---------------------------------------------------------------------
+\subsection{RQ2: What Does the Gain Rely On?}\label{sec:rq2}
 
 \begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig4_channel_budget.pdf}
-\caption{Pareto frontier of forecast accuracy (MSE) and per-window inference latency across channel budgets $K \in \{1..128\}$ on an NVIDIA RTX 4090.}
-\label{fig:channel_budget}
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_interventions.pdf}
+  \caption{(a) Reliance $\Rel_\pi$ with 95\% intervals on the two datasets
+  whose benefit interval excludes zero at $H=96$. $\Rel=1$: benefit erased;
+  $\Rel>1$: worse than the \UV{} mode; arrows mark upper bounds beyond 4.
+  (b) Positive control P1: error change relative to the \MV{} mode when a
+  noisy copy of the target's future, led by $k$ steps, is added.}
+  \label{fig:interventions}
 \end{figure}
 
-\noindent\textbf{Finding 5. More channels do not guarantee higher accuracy; Top-$K$ selection capped at 32 channels achieves optimal Pareto efficiency.}
-Figure~\ref{fig:channel_budget} maps accuracy and per-window inference latency across channel budgets $K \in \{1, 2, 4, 8, 16, 32, 64, 128\}$:
-\begin{enumerate}
-    \item \textbf{Accuracy Dynamics}: On Electricity, correlation-based Top-$K$ selection lowers MSE steadily up to $K=32$ ($0.1352 \to 0.1344$), consistently outperforming Bottom-$K$ ($0.1355$) and Random grouping ($0.1340$). Beyond $K=32$, accuracy completely saturates. On Solar, adding channels monotonically degrades MSE from $0.2138$ at $K=1$ down to $0.2578$ at $K=32$.
-    \item \textbf{Latency Discontinuity on Hardware}: On an RTX 4090, per-window latency is strictly constant at $53.0\text{ ms}$ for all $K \le 32$ because execution fits inside a single forward chunk. However, at $K=64$, latency doubles to $108.0\text{ ms}$ ($\lceil 64/32 \rceil = 2$ passes), and at $K=128$, latency quadruples to $218.6\text{ ms}$ (4 passes). Peak VRAM remains modest across all budgets ($\le 1.35\text{ GB}$).
-\end{enumerate}
-Consequently, pruning high-dimensional telemetry to the Top-32 correlated series achieves peak accuracy while avoiding the step-function latency penalty of the sequential chunker.
+\begin{table}[t]
+  \centering
+  \caption{Interventions at $H=96$, 100 windows. For Electricity and Weather
+  we report $\Rel_\pi$; for ETTh1 (benefit interval includes zero) and
+  Solar-Energy (negative benefit) we report the error change $\Delta_\pi$
+  (\%) relative to the \MV{} mode. Brackets: 95\% bootstrap intervals;
+  \textbf{bold}: Holm-adjusted $p<0.05$. --: shift exceeds the context.
+  Source: \texttt{e2\_interventions\_summary.csv}.}
+  \label{tab:e2}
+  \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{0.92}
+  \scriptsize
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{$\Rel_\pi$} & \multicolumn{2}{c}{$\Delta_\pi$ (\%)} \\
+    \cmidrule(lr){2-3}\cmidrule(l){4-5}
+    & Electricity & Weather & Solar-Energy & ETTh1 \\
+    & \vc{$\Ben=+1.61\%$}{0.60}{2.55} & \vc{$\Ben=+12.23\%$}{3.01}{23.04} & \vc{$\Ben=-13.39\%$}{-27.36}{-1.13} & \vc{$\Ben=-0.89\%$}{-5.26}{4.16} \\
+    \midrule
+    N2 copy      & \vc{$0.03$}{-0.19}{0.18} & \vc{$0.07$}{-0.03}{0.14} & \vc{$-0.07$}{-0.34}{0.19} & \vc{$\mathbf{+0.89}$}{0.26}{1.51} \\
+    N3 lag 16    & \vc{$0.11$}{-0.06}{0.42} & \vc{$-0.02$}{-0.23}{0.04} & \vc{$-0.35$}{-1.56}{0.79} & \vc{$+0.93$}{-0.36}{2.14} \\
+    N4 noise     & \vc{$\mathbf{1.46}$}{0.89}{3.29} & \vc{$\mathbf{1.63}$}{0.92}{4.66} & \vc{$\mathbf{+11.50}$}{6.31}{17.66} & \vc{$-0.81$}{-3.76}{1.67} \\
+    I1 shuffle   & \vc{$\mathbf{1.35}$}{0.86}{2.87} & \vc{$\mathbf{1.00}$}{0.46}{3.28} & \vc{$\mathbf{+13.10}$}{5.75}{21.30} & \vc{$-1.67$}{-4.29}{0.14} \\
+    I2 unaligned & \vc{$\mathbf{2.06}$}{1.46}{5.04} & \vc{$\mathbf{0.37}$}{0.14}{1.06} & \vc{$\mathbf{+2.74}$}{-6.84}{13.91} & \vc{$-2.46$}{-5.98}{0.22} \\
+    I3 week-aligned & \vc{$0.50$}{-0.31}{1.25} & \vc{$0.89$}{0.32}{3.36} & \vc{$-0.28$}{-12.02}{12.85} & \vc{$-2.27$}{-5.48}{0.23} \\
+    I4 IAAFT     & \vc{$\mathbf{1.99}$}{1.39}{4.87} & \vc{$\mathbf{0.66}$}{0.13}{2.06} & \vc{$\mathbf{+38.71}$}{19.38}{65.84} & \vc{$-1.89$}{-4.33}{-0.50} \\
+    I5 1 step    & \vc{$0.02$}{-0.15}{0.20} & \vc{$0.04$}{-0.04}{0.19} & \vc{$+0.56$}{-2.21}{2.82} & \vc{$+0.20$}{-0.61}{0.99} \\
+    I5 1 h       & (= 1 step)              & \vc{$0.06$}{-0.27}{0.28} & \vc{$\mathbf{+6.23}$}{1.99}{10.90} & (= 1 step) \\
+    I5 1 day     & \vc{$\mathbf{1.77}$}{1.17}{4.09} & \vc{$\mathbf{0.98}$}{0.40}{3.18} & \vc{$\mathbf{+56.73}$}{32.73}{90.06} & \vc{$-2.14$}{-4.39}{-0.57} \\
+    I5 1 week   & \vc{$\mathbf{1.13}$}{0.69}{2.24} & -- & -- & \vc{$-2.61$}{-5.20}{-0.42} \\
+    \midrule
+    & \multicolumn{4}{c}{P1 positive control, $\Delta_\pi$ (\%) for all four datasets} \\
+    \midrule
+    P1 $k=16$    & \vc{$\mathbf{-1.58}$}{-2.37}{-1.06} & \vc{$\mathbf{-9.71}$}{-12.30}{-6.60} & \vc{$-2.11$}{-5.43}{1.10} & \vc{$\mathbf{-10.94}$}{-14.58}{-6.28} \\
+    P1 $k=32$    & \vc{$\mathbf{-2.95}$}{-4.19}{-2.14} & \vc{$\mathbf{-18.72}$}{-22.87}{-15.06} & \vc{$\mathbf{-11.12}$}{-17.82}{-4.60} & \vc{$\mathbf{-21.94}$}{-26.00}{-17.01} \\
+    P1 6\,h      & \vc{$\mathbf{-0.62}$}{-0.84}{-0.49} & \vc{$\mathbf{-20.58}$}{-24.82}{-16.55} & \vc{$\mathbf{-13.27}$}{-21.97}{-5.17} & \vc{$-3.24$}{-5.32}{-1.27} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\section{Practical Data Engineering Guidelines}
-\label{sec:guidelines}
+Table~\ref{tab:e2} and Fig.~\ref{fig:interventions} report the interventions.
+On Electricity, Weather and Solar-Energy the benefits in this 100-window
+sample have the same sign as in RQ1.
 
-Based on our empirical probing findings, we formulate three actionable guidelines for deploying multivariate foundation models in production telemetry and database systems:
+\paragraph{Controls.} Permuting the context channels (N1) changes the
+forecasts by less than $3\times10^{-7}$ on average on the standardized scale,
+which confirms permutation equivariance up to floating-point error. Adding a copy of the target (N2) or a lagged copy
+(N3) leaves the benefit unchanged on Electricity and Weather ($|\Rel|\le
+0.11$); on ETTh1 the copy raises the error by 0.89\% (Holm-adjusted
+$p=0.011$), a small cost of redundant input. The positive control works on all
+four datasets (Fig.~\ref{fig:interventions}b): a 32-step leading indicator reduces the error by 21.94\% on
+ETTh1, 18.72\% on Weather, 11.12\% on Solar-Energy and 2.95\% on Electricity,
+and the reduction grows with the lead. Since a lead of $k$ steps reveals the
+first $k$ of the 96 future values, the protocol detects cross-channel use
+when the information is present. In a separate diagnostic run on
+Solar-Energy with a noise-free 32-step indicator, the error on the first 32
+steps fell by 31.83\% \ci{-37.79}{-23.57} (28.48\% with the noise level
+of the main run) and on the remaining steps by 9.64\%, so the model uses the
+indicator where it is informative. The effect is smallest on Electricity; we
+have not identified the cause.
 
-\begin{enumerate}
-    \item \textbf{Adaptive Mode Gating via Spectral Analysis}: Before deploying multivariate foundation models on new telemetry streams, compute the cross-correlation matrix on validation data. If the spectral ratio $\rho = \lambda_1 / \sum_{k=1}^N \lambda_k < 0.35$ (indicating weak or non-stationary shared variance, as observed in Solar and high-frequency ETTm), default to univariate mode ($\UV$). This guarantees immunity against negative transfer while cutting inference compute by $50\%$.
-    \item \textbf{Correlation-Driven 32-Channel Budgeting}: For high-dimensional physical networks (grid, traffic, industrial IoT), prune the context set to the Top-$K$ most correlated channels with $K \le 32$. This captures maximal predictive cross-talk while strictly respecting the model's native chunking limit, eliminating unnecessary multi-pass latency overheads.
-    \item \textbf{Chunking-Aware Batch Alignment}: In multi-tenant database serving engines, batch requests such that total channel dimensions align with multiples of 32. This prevents the official evaluator from allocating redundant forward passes with padded repeat tokens.
-\end{enumerate}
+\paragraph{Electricity: calendar-consistent context, not step-level
+synchrony.} Shifting the true context by one hour barely matters
+($\Rel=0.02$ \ci{-0.15}{0.20}), so the gain does not depend on exact
+step-level alignment. What matters is whether the context has the same
+calendar phase as the target. Context taken from whole weeks earlier (I3)
+keeps about half of the benefit ($\Rel=0.50$), although it is at least 30
+days old. Context from 30 days and 7 hours earlier (I2), which differs in
+hour and weekday, is worse than no context ($\Rel=2.06$ \ci{1.46}{5.04}); the
+two intervals do not overlap. Phase-randomized surrogates that keep each
+channel's spectrum (I4, $\Rel=1.99$) and a one-day circular shift that keeps
+the hour but not the weekday (I5, $\Rel=1.77$) do the same. These
+phase-inconsistent but realistic contexts are at least as harmful as
+Gaussian noise ($\Rel=1.46$). The model thus reads the context channels as a
+calendar-aligned profile of the current state: when that profile is
+consistent with the target, it helps; when it is realistic but out of phase,
+the model follows it and the error rises above the \UV{} level.
 
-\noindent\textbf{Threats to Validity and Limitations.}
-First, pretraining data audit reveals that PeMS traffic telemetry was included in the pretraining inventory of $\tfm$, meaning Traffic cannot be interpreted as a clean zero-shot benchmark. Second, our analysis evaluated inference dynamics without access to official pretraining code; future work should explore whether explicit auxiliary loss functions during pretraining can teach models to adaptively ignore distractor channels.
+\paragraph{Weather: recent physical state.} On Weather, shifts of up to one
+hour leave the benefit intact ($\Rel\le0.06$), while context that is a day or
+more stale, or has lost its temporal order, removes most of it: a one-day
+shift ($\Rel=0.98$), week-aligned history ($\Rel=0.89$) and time shuffling
+($\Rel=1.00$). Calendar
+phase does not rescue the gain here, which fits a weather system with a
+diurnal cycle but no weekly one. Noise is the most harmful intervention
+($\Rel=1.63$). Unaligned history (I2) keeps part of the benefit
+($\Rel=0.37$ \ci{0.14}{1.06}); the interval is wide, and we do not interpret
+this value further.
 
-\section{Conclusion}
-\label{sec:conclusion}
-In this paper, we presented the first comprehensive diagnostic probing investigation of cross-variate attention in Google's 330M-parameter $\tfm$. Our evaluation across 8 standard benchmarks revealed marked domain bimodality: variate attention delivers steady gains on physical systems (Weather, Electricity) but triggers catastrophic degradation on high-frequency noise domains (Solar). Through 11 targeted causal interventions, we established that $\tfm$ is strictly permutation-invariant, depends on micro-phase synchronization rather than static feature pooling, and exhibits acute vulnerability to uncorrelated distractor channels. Comparisons against analytical Kalman filter oracles on state-space generators quantified the limits of zero-shot factor recovery. Finally, hardware profiling established that correlation-based Top-$K$ selection capped at 32 channels provides the optimal accuracy-latency Pareto frontier for real-world time-series data management systems.
+\paragraph{Solar-Energy: close reading, net harm.} Although the \MV{} mode
+already hurts on Solar-Energy, the model does not ignore the context: every
+information-destroying intervention raises the error further, by 11.50\%
+(noise) to 56.73\% (one-day shift), and even a one-hour shift costs 6.23\%.
+The forecast moves more than on the other datasets (sensitivity
+$\Sen=0.133$ for the one-day shift versus $0.035$ on Electricity). Only a one-step shift, week-aligned history and
+unaligned history leave the summed error within its bootstrap interval
+($+0.56\%$, $-0.28\%$, $+2.74\%$). Variate attention on Solar-Energy is therefore active and
+phase-sensitive, and its net effect is negative.
+
+\paragraph{ETTh1.} Apart from the controls N2 and P1, no intervention is
+significant after Holm correction, consistent with the absence of a benefit.
+
+\paragraph{Answer to RQ2.} Where the \MV{} mode helps, the gain depends on
+context that is recent (Weather) or calendar-consistent (Electricity); it
+tolerates misalignment of up to an hour. Realistic but phase-inconsistent
+context is as harmful as noise and pushes the error above the \UV{} level.
+
+% ---------------------------------------------------------------------
+\subsection{RQ3: How Much Available Information Is Extracted?}\label{sec:rq3}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.62\textwidth]{figures/fig3_leadlag.pdf}
+  \caption{Lead--lag generator G5 ($N=8$): improvement of the \MV{} over the
+  \UV{} Kalman oracle (available information) and benefit $\Ben$ of \tfm{}.
+  Gap closure $\GC$ is shown where the oracle gap is at least 5\%. Dashed:
+  benefit of \tfm{} on independent channels (G6). Source:
+  \texttt{e3\_synthetic\_summary.csv}.}
+  \label{fig:leadlag}
+\end{figure}
+
+Figure~\ref{fig:leadlag} shows the lead--lag generator G5. The information
+available to an ideal forecaster grows with the lag, from a 0.45\% oracle
+improvement at $\ell=1$ to 8.14\%, 21.48\% and 41.10\% at $\ell=16$, 32 and
+64. The benefit of \tfm{} does not follow: it stays between 2.09\% and 4.56\%
+for every lag. Gap closure therefore falls from 0.29 at $\ell=16$ to 0.23 at
+$\ell=32$ and 0.05 at $\ell=64$. At $\ell=1$ the model gains 3.18\%, more
+than the 0.45\% the oracle can obtain from the other channels.
+
+The null generator G6 explains this excess. With independent channels, where
+the oracle gains nothing, \tfm{} still gains 3.63\% ($N=8$) and 3.13\%
+($N=32$). A benefit of about 3\% thus arises without any cross-channel
+information, and the lead--lag benefits of 2.1--4.6\% are of the same
+size. The model does not exploit a synthetic leading driver, even though it
+exploits the leading indicator of P1. The two differ in form: P1 is a shifted
+copy of the target, which the model can match by shape, whereas the G5
+driver enters the target through its own dynamics and noise. We read this as
+evidence that the model follows near-copies in the context better than it
+infers a lagged regression, a hypothesis that deserves a direct test.
+
+For the factor (G1), block (G2) and drift (G3) generators the oracle gap was
+below 2.4\% in all 33 configurations, and in 11 of them the multivariate
+oracle error exceeded the univariate one on the finite test set; these systems
+carry too little cross-channel information at our sample size to compute
+$\GC$. The model's benefit on them (median 2.66\%, range $-5.15\%$ to
+$+6.23\%$) is of the same size as on G6. We did not record bootstrap
+intervals for the synthetic runs, so differences of one or two points between
+these values should not be interpreted.
+
+\paragraph{Answer to RQ3.} On synthetic data, \tfm{} realizes at most 29\% of
+the available lead--lag information and a gain of about 3\% that does not
+require cross-channel information. A positive $\Ben$ is therefore not
+sufficient evidence of cross-channel use; the interventions of RQ2 are needed
+to establish what the gain relies on.
+
+% ---------------------------------------------------------------------
+\subsection{RQ4: How Many Channels, and at What Cost?}\label{sec:rq4}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig4_budget.pdf}
+  \caption{Channel budget $K$ at $H=96$. (a,b) Error change relative to the
+  \UV{} mode ($K=1$) when the target is forecast together with the $K-1$
+  channels of highest, lowest or random training correlation, in one forward
+  pass. (c) Median latency per call on an RTX 4090 for the reference evaluator
+  (blocks of 32) and for a single pass over all $K$ channels. Sources:
+  \texttt{e5\_grouping\_summary.csv}, \texttt{e5\_official\_chunked\_from\_log.csv}.}
+  \label{fig:budget}
+\end{figure}
+
+For each target we select $K-1$ companions by absolute training correlation
+(top-$K$, bottom-$K$) or at random, and forecast the target together with
+them. We run two variants: the reference evaluator, which splits $K>32$
+channels into blocks of 32, and a single forward pass over all $K$ channels.
+
+\paragraph{The reference evaluator isolates blocks.} With the reference
+evaluator, the error for $K=64$ and $K=128$ is identical to
+$K=32$ for every strategy on both datasets (e.g.\ Electricity, top-$K$: MSE
+0.1344 at $K=32,64,128$). Channels outside the target's block cannot reach
+it, yet each extra block is a sequential forward pass: median latency rises
+from 54.8\,ms at $K=32$ to 108.9\,ms at $K=64$ and 217.1\,ms at $K=128$, while
+peak memory stays at 1.35\,GB (Fig.~\ref{fig:budget}c).
+
+\paragraph{Accuracy in a single pass.} Removing the cap lets all $K$ channels
+interact. On Electricity the error decreases up to $K=32$ and then flattens
+(Fig.~\ref{fig:budget}a): random companions give $-1.64\%$ at $K=32$ and
+$-1.69\%$ at $K=128$, top-$K$ companions $-1.35\%$ and $-0.78\%$.
+The most correlated companions are better than random ones for $K\le16$ (by
+0.3--0.6 points) but not for $K\ge32$, where random companions give the
+lowest error; the least correlated companions are worst for $K\le64$ (e.g.\
+$+1.28\%$ at $K=2$). On Solar-Energy every additional channel raises the
+error (Fig.~\ref{fig:budget}b): $+1.51\%$ at $K=2$, $+18.72\%$ at $K=32$ and
+$+23.20\%$ at $K=64$ with top-$K$ selection. Top-$K$ selection slows the
+degradation at small $K$ ($+12.64\%$ vs.\ $+16.89\%$ random at $K=8$) but
+does not reverse it. These differences come from 50 windows and are
+small relative to the between-window spread; we treat the ordering of
+strategies as indicative.
+
+\paragraph{Cost in a single pass.} Latency stays at 44.2--44.7\,ms for
+$K\le16$, so small groups cost no more than the \UV{} mode on this GPU. It
+then grows roughly linearly: 52.9\,ms at $K=32$, 82.1\,ms at $K=64$ and
+159.2\,ms at $K=128$, with peak memory rising from 1.27 to 1.59\,GB. At
+$K=128$ the single pass is 27\% faster than the blocked evaluator and, unlike
+it, lets every channel reach the target. The two runs drew their windows and targets
+separately and were made at different times, so we compare them only in
+latency, and absolute values differ by a few milliseconds.
+
+\paragraph{Answer to RQ4.} Under the reference evaluator, supplying more than
+the target's block of 32 channels only adds latency. With a single pass,
+Electricity saturates at about 32 channels and gains little from
+correlation-based selection at that size, while Solar-Energy is best served
+by the \UV{} mode.
+
+% =====================================================================
+\section{Data Engineering Guidelines}\label{sec:guidelines}
+
+\paragraph{G1: Decide the mode per dataset and horizon on validation data.}
+The benefit ranged from $-31.95\%$ to $+8.04\%$ across datasets and changed
+with the horizon within a dataset (Weather: $+8.04\%$ at $H=96$, interval
+including zero at $H=336$). A paired \UV/\MV{} comparison on a validation
+split costs two inference runs and should precede deployment. Zero-inflated
+series with sharp daily transitions, such as Solar-Energy, should default to
+the \UV{} mode.
+
+\paragraph{G2: Verify what a gain relies on before trusting it.} Because a
+benefit of about 3\% appears on independent synthetic channels, a positive
+validation benefit does not show that the model reads useful cross-channel
+information. Two cheap checks separate the cases: a one-hour shift of the
+context (which should leave the benefit intact) and a one-day shift (which
+should remove it if the context matters).
+
+\paragraph{G3: Align timestamps to within an hour and drop stale channels.}
+The gain tolerated one hour of misalignment but turned into a loss when the
+context was a day stale or out of calendar phase ($\Rel$ up to 2.06). In a
+pipeline that joins sensor feeds, late-arriving feeds that would be
+forward-filled or joined with a day's delay should be excluded rather than
+passed to the model, and clock offsets should be corrected before the join.
+
+\paragraph{G4: Filter noisy and dead channels.} Noise-like channels removed
+the benefit on Electricity and Weather ($\Rel=1.46$, $1.63$) and raised the
+error by 11.50\% on Solar-Energy. Channels with failing sensors or constant
+values should be removed before inference.
+
+\paragraph{G5: Build the blocks explicitly.} The reference evaluator groups
+channels by column order, so the table layout decides which channels
+interact, and channels outside the target's block add latency without
+effect. Constructing groups of at most 32 channels that contain the target
+and its intended companions avoids this cost. On Electricity at $K=32$, random
+companions were as good as the most correlated ones, so a correlation
+analysis over all channel pairs is not required to form useful groups of
+that size.
+
+\paragraph{G6: Budget latency by block size.} On an RTX 4090 a single pass
+over up to 16 channels costs the same as a univariate call (44\,ms), and
+latency grows about linearly beyond 32 channels. Serving systems can pack up
+to 16 channels per request at no extra cost and should expect up to
+2$\times$ latency for each doubling of the channel count beyond 32.
+
+\paragraph{G7: Supply leading indicators when they exist.} A channel that
+leads the target is exploited (up to 21.94\% lower error), so known leading
+signals, such as scheduled load or upstream sensors, are the channels most
+worth adding.
+
+% =====================================================================
+\section{Related Work}\label{sec:related}
+
+\subsubsection{Multivariate TSFMs.}
+Moirai~\cite{woo2024moirai} flattens all variates into one sequence with
+learned variate biases, and its successor Moirai 2.0~\cite{liu2025moirai2}
+returns to univariate forecasting. Chronos-2~\cite{ansari2025chronos2}
+applies group attention across series at each patch position and learns
+multivariate behavior from synthetic data. \tfm{}~\cite{timesfm3_blog2026}
+and Toto~2.0~\cite{khwaja2026toto2} alternate attention along time with
+attention across variates, whereas TiRex-2~\cite{carlsen2026tirex2} lets
+targets read covariates asymmetrically. Sun et al.~\cite{rmisc2026} report
+that real multivariate pretraining data improve over synthetic
+multivariatization. Falcon-X~\cite{liu2026falconx} is the closest work: its
+authors observe that Chronos-2 is nearly insensitive to disabling group
+attention and use the observation to motivate a new architecture. We instead
+turn the question into a controlled probe of \tfm{} and characterize when
+variate attention helps, is idle, or hurts.
+
+\subsubsection{Channel independence and dependence.}
+Channel-independent models such as PatchTST~\cite{nie2023patchtst} and
+DLinear~\cite{zeng2023dlinear} match or exceed channel-dependent
+Transformers~\cite{zhou2021informer,wu2021autoformer,zhou2022fedformer};
+iTransformer~\cite{liu2024itransformer} treats each variate as a token. Han
+et al.~\cite{han2024capacity} explain the advantage of channel independence
+by a trade-off between capacity and robustness. Abdelmalak et
+al.~\cite{abdelmalak2025lookback} find weak Granger causality in standard
+benchmarks: channel-independent models win 21 of 28 comparisons there, while
+channel-dependent models win 18 of 24 on coupled ODE systems. Song et
+al.~\cite{song2026cloc} regulate local and global channel communication per
+dataset and find that suppression suits ETT while Electricity and
+Solar-Energy benefit from communication. LIFT~\cite{lift2024} identifies
+leading indicators as a main source of cross-channel information, and
+CPiRi~\cite{cpiri2026} shows that channel-dependent models can overfit the
+channel order. These studies train one model per dataset. We ask the
+corresponding questions for a single pretrained model at inference time,
+where cross-channel use can be switched off and manipulated without
+retraining. Our results differ from the supervised picture in one respect:
+Song et al.~\cite{song2026cloc} find communication useful on Solar-Energy,
+where \tfm{} is harmed by it.
+
+\subsubsection{Evaluating and probing TSFMs.}
+GIFT-Eval~\cite{gifteval2024}, fev-bench~\cite{fevbench2025} and
+TIME~\cite{timebench2026} compare models across many tasks; such comparisons
+confound cross-channel attention with all other differences between models.
+We intervene on inputs rather than
+inspect attention maps~\cite{jain2019attention} and use IAAFT
+surrogates~\cite{schreiber1996surrogate}, a standard tool for destroying
+phase relations while keeping each channel's spectrum and marginal
+distribution.
+
+% =====================================================================
+\section{Conclusion}\label{sec:conclusion}
+
+We probed the variate attention of \tfm{} with paired mode switches,
+controlled interventions and synthetic oracles. The \MV{} mode pays off on
+Weather, ETTh2 and Electricity, is idle on three ETT datasets and hurts on
+Solar-Energy by up to 31.95\%. Where it helps, the gain rests on recent or
+calendar-consistent context and tolerates an hour of misalignment;
+realistic but out-of-phase context is as harmful as noise. An injected
+leading indicator is used, a synthetic lead--lag driver is not, and about
+3\% of benefit appears without any cross-channel information. The reference
+evaluator's 32-variate blocks make channels beyond the target's block cost
+latency without effect.
+
+\paragraph{Limitations.} We study one model; the protocol applies unchanged
+to Chronos-2, Toto~2.0 and TiRex-2, and repeating it on these models is the
+next step. We did not compare against supervised channel-dependent
+baselines. The interventions use a single horizon ($H=96$) and 100 windows,
+the synthetic runs lack confidence intervals, and the G1--G3 generators
+produced oracle gaps too small for gap closure. Traffic may have been seen
+in pretraining. Code, configurations and raw outputs will be released at
+\url{https://anonymous.4open.science} upon acceptance.
 
 \bibliographystyle{splncs04}
 \bibliography{references}
