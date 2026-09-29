@@ -1,0 +1,203 @@
+================================================================================
+STARTING E1: LTSF 8 DATASETS EXPERIMENT (UV vs MV)
+Mode: Sampled (300 windows)
+Horizons: [96, 192, 336, 720]
+Context Length: 512
+================================================================================
+Loading TimesFM-3.0 Evaluator from /root/autodl-tmp/models/timesfm-3.0-pytorch on cuda...
+Loading weights from local directory
+TimesFM-3.0 successfully initialized (try_gc monkeypatched).
+Loaded 23 existing checkpoints from /root/autodl-tmp/results/e1_ltsf_sampled.csv
+
+>>> Processing Dataset: ETTh1 (variates: 7)
+Total windows to evaluate: 300
+  --> Dataset ETTh1 Horizon H=96 already completed. Skipping...
+  --> Dataset ETTh1 Horizon H=192 already completed. Skipping...
+  --> Dataset ETTh1 Horizon H=336 already completed. Skipping...
+  --> Dataset ETTh1 Horizon H=720 already completed. Skipping...
+
+>>> Processing Dataset: ETTh2 (variates: 7)
+Total windows to evaluate: 300
+  --> Dataset ETTh2 Horizon H=96 already completed. Skipping...
+  --> Dataset ETTh2 Horizon H=192 already completed. Skipping...
+  --> Dataset ETTh2 Horizon H=336 already completed. Skipping...
+  --> Dataset ETTh2 Horizon H=720 already completed. Skipping...
+
+>>> Processing Dataset: ETTm1 (variates: 7)
+Total windows to evaluate: 300
+  --> Dataset ETTm1 Horizon H=96 already completed. Skipping...
+  --> Dataset ETTm1 Horizon H=192 already completed. Skipping...
+  --> Dataset ETTm1 Horizon H=336 already completed. Skipping...
+  --> Dataset ETTm1 Horizon H=720 already completed. Skipping...
+
+>>> Processing Dataset: ETTm2 (variates: 7)
+Total windows to evaluate: 300
+  --> Dataset ETTm2 Horizon H=96 already completed. Skipping...
+  --> Dataset ETTm2 Horizon H=192 already completed. Skipping...
+  --> Dataset ETTm2 Horizon H=336 already completed. Skipping...
+  --> Dataset ETTm2 Horizon H=720 already completed. Skipping...
+
+>>> Processing Dataset: weather (variates: 21)
+Total windows to evaluate: 300
+  --> Dataset weather Horizon H=96 already completed. Skipping...
+  --> Dataset weather Horizon H=192 already completed. Skipping...
+  --> Dataset weather Horizon H=336 already completed. Skipping...
+  --> Dataset weather Horizon H=720 already completed. Skipping...
+
+>>> Processing Dataset: electricity (variates: 321)
+Total windows to evaluate: 300
+  --> Dataset electricity Horizon H=96 already completed. Skipping...
+  --> Dataset electricity Horizon H=192 already completed. Skipping...
+  --> Dataset electricity Horizon H=336 already completed. Skipping...
+  --> Horizon H=720...
+    [32/300] H=720 | UV MSE: 0.2049 | MV MSE: 0.2039 | Benefit B: +0.50% | Elapsed: 84.2s
+    [64/300] H=720 | UV MSE: 0.2051 | MV MSE: 0.2048 | Benefit B: +0.12% | Elapsed: 168.4s
+    [96/300] H=720 | UV MSE: 0.2153 | MV MSE: 0.2137 | Benefit B: +0.76% | Elapsed: 252.2s
+    [128/300] H=720 | UV MSE: 0.2162 | MV MSE: 0.2117 | Benefit B: +2.08% | Elapsed: 335.9s
+    [160/300] H=720 | UV MSE: 0.2176 | MV MSE: 0.2119 | Benefit B: +2.65% | Elapsed: 419.6s
+    [192/300] H=720 | UV MSE: 0.2134 | MV MSE: 0.2069 | Benefit B: +3.05% | Elapsed: 503.2s
+    [224/300] H=720 | UV MSE: 0.2045 | MV MSE: 0.1984 | Benefit B: +2.95% | Elapsed: 587.2s
+    [256/300] H=720 | UV MSE: 0.2057 | MV MSE: 0.1999 | Benefit B: +2.85% | Elapsed: 670.9s
+    [288/300] H=720 | UV MSE: 0.2013 | MV MSE: 0.1953 | Benefit B: +3.01% | Elapsed: 754.7s
+    [300/300] H=720 | UV MSE: 0.2040 | MV MSE: 0.1982 | Benefit B: +2.86% | Elapsed: 786.2s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+
+>>> Processing Dataset: solar (variates: 137)
+Total windows to evaluate: 300
+  --> Horizon H=96...
+    [32/300] H=96 | UV MSE: 0.2891 | MV MSE: 0.2721 | Benefit B: +5.88% | Elapsed: 18.0s
+    [64/300] H=96 | UV MSE: 0.2937 | MV MSE: 0.3109 | Benefit B: -5.86% | Elapsed: 36.0s
+    [96/300] H=96 | UV MSE: 0.2662 | MV MSE: 0.2772 | Benefit B: -4.11% | Elapsed: 54.1s
+    [128/300] H=96 | UV MSE: 0.2795 | MV MSE: 0.3011 | Benefit B: -7.73% | Elapsed: 72.1s
+    [160/300] H=96 | UV MSE: 0.2434 | MV MSE: 0.2681 | Benefit B: -10.14% | Elapsed: 90.1s
+    [192/300] H=96 | UV MSE: 0.2371 | MV MSE: 0.2569 | Benefit B: -8.35% | Elapsed: 108.1s
+    [224/300] H=96 | UV MSE: 0.2176 | MV MSE: 0.2379 | Benefit B: -9.34% | Elapsed: 126.1s
+    [256/300] H=96 | UV MSE: 0.2087 | MV MSE: 0.2321 | Benefit B: -11.19% | Elapsed: 144.2s
+    [288/300] H=96 | UV MSE: 0.2005 | MV MSE: 0.2157 | Benefit B: -7.58% | Elapsed: 162.2s
+    [300/300] H=96 | UV MSE: 0.2087 | MV MSE: 0.2248 | Benefit B: -7.72% | Elapsed: 168.9s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=192...
+    [32/300] H=192 | UV MSE: 0.3677 | MV MSE: 0.3607 | Benefit B: +1.88% | Elapsed: 19.5s
+    [64/300] H=192 | UV MSE: 0.3488 | MV MSE: 0.3952 | Benefit B: -13.32% | Elapsed: 39.0s
+    [96/300] H=192 | UV MSE: 0.3140 | MV MSE: 0.3505 | Benefit B: -11.61% | Elapsed: 58.6s
+    [128/300] H=192 | UV MSE: 0.3232 | MV MSE: 0.3645 | Benefit B: -12.77% | Elapsed: 78.2s
+    [160/300] H=192 | UV MSE: 0.2796 | MV MSE: 0.3209 | Benefit B: -14.77% | Elapsed: 97.6s
+    [192/300] H=192 | UV MSE: 0.2749 | MV MSE: 0.3122 | Benefit B: -13.56% | Elapsed: 117.2s
+    [224/300] H=192 | UV MSE: 0.2513 | MV MSE: 0.2885 | Benefit B: -14.80% | Elapsed: 136.6s
+    [256/300] H=192 | UV MSE: 0.2411 | MV MSE: 0.2801 | Benefit B: -16.20% | Elapsed: 156.1s
+    [288/300] H=192 | UV MSE: 0.2373 | MV MSE: 0.2686 | Benefit B: -13.17% | Elapsed: 175.6s
+    [300/300] H=192 | UV MSE: 0.2398 | MV MSE: 0.2703 | Benefit B: -12.68% | Elapsed: 183.0s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=336...
+    [32/300] H=336 | UV MSE: 0.4342 | MV MSE: 0.4394 | Benefit B: -1.20% | Elapsed: 25.0s
+    [64/300] H=336 | UV MSE: 0.3953 | MV MSE: 0.4683 | Benefit B: -18.46% | Elapsed: 50.0s
+    [96/300] H=336 | UV MSE: 0.3616 | MV MSE: 0.4169 | Benefit B: -15.30% | Elapsed: 74.9s
+    [128/300] H=336 | UV MSE: 0.3602 | MV MSE: 0.4208 | Benefit B: -16.80% | Elapsed: 99.7s
+    [160/300] H=336 | UV MSE: 0.3110 | MV MSE: 0.3738 | Benefit B: -20.20% | Elapsed: 124.7s
+    [192/300] H=336 | UV MSE: 0.3108 | MV MSE: 0.3706 | Benefit B: -19.23% | Elapsed: 149.7s
+    [224/300] H=336 | UV MSE: 0.2853 | MV MSE: 0.3489 | Benefit B: -22.31% | Elapsed: 174.6s
+    [256/300] H=336 | UV MSE: 0.2716 | MV MSE: 0.3348 | Benefit B: -23.29% | Elapsed: 199.5s
+    [288/300] H=336 | UV MSE: 0.2706 | MV MSE: 0.3267 | Benefit B: -20.74% | Elapsed: 224.4s
+    [300/300] H=336 | UV MSE: 0.2704 | MV MSE: 0.3262 | Benefit B: -20.63% | Elapsed: 233.8s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=720...
+    [32/300] H=720 | UV MSE: 0.4281 | MV MSE: 0.4535 | Benefit B: -5.93% | Elapsed: 36.1s
+    [64/300] H=720 | UV MSE: 0.3994 | MV MSE: 0.5119 | Benefit B: -28.18% | Elapsed: 72.4s
+    [96/300] H=720 | UV MSE: 0.3741 | MV MSE: 0.4585 | Benefit B: -22.55% | Elapsed: 108.6s
+    [128/300] H=720 | UV MSE: 0.3696 | MV MSE: 0.4615 | Benefit B: -24.85% | Elapsed: 144.8s
+    [160/300] H=720 | UV MSE: 0.3309 | MV MSE: 0.4430 | Benefit B: -33.90% | Elapsed: 181.0s
+    [192/300] H=720 | UV MSE: 0.3379 | MV MSE: 0.4428 | Benefit B: -31.04% | Elapsed: 217.2s
+    [224/300] H=720 | UV MSE: 0.3129 | MV MSE: 0.4200 | Benefit B: -34.23% | Elapsed: 253.4s
+    [256/300] H=720 | UV MSE: 0.2959 | MV MSE: 0.4012 | Benefit B: -35.60% | Elapsed: 289.5s
+    [288/300] H=720 | UV MSE: 0.2986 | MV MSE: 0.3921 | Benefit B: -31.30% | Elapsed: 325.7s
+    [300/300] H=720 | UV MSE: 0.3039 | MV MSE: 0.4010 | Benefit B: -31.95% | Elapsed: 339.2s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+
+>>> Processing Dataset: traffic (variates: 862)
+Total windows to evaluate: 300
+  --> Horizon H=96...
+    [32/300] H=96 | UV MSE: 0.2911 | MV MSE: 0.2835 | Benefit B: +2.59% | Elapsed: 108.4s
+    [64/300] H=96 | UV MSE: 0.2769 | MV MSE: 0.2738 | Benefit B: +1.10% | Elapsed: 216.9s
+    [96/300] H=96 | UV MSE: 0.3117 | MV MSE: 0.3063 | Benefit B: +1.72% | Elapsed: 325.6s
+    [128/300] H=96 | UV MSE: 0.3097 | MV MSE: 0.3060 | Benefit B: +1.19% | Elapsed: 434.0s
+    [160/300] H=96 | UV MSE: 0.3145 | MV MSE: 0.3114 | Benefit B: +0.97% | Elapsed: 542.8s
+    [192/300] H=96 | UV MSE: 0.3100 | MV MSE: 0.3074 | Benefit B: +0.83% | Elapsed: 651.6s
+    [224/300] H=96 | UV MSE: 0.3062 | MV MSE: 0.3044 | Benefit B: +0.59% | Elapsed: 760.3s
+    [256/300] H=96 | UV MSE: 0.3236 | MV MSE: 0.3210 | Benefit B: +0.82% | Elapsed: 868.9s
+    [288/300] H=96 | UV MSE: 0.3453 | MV MSE: 0.3422 | Benefit B: +0.91% | Elapsed: 977.4s
+    [300/300] H=96 | UV MSE: 0.3431 | MV MSE: 0.3389 | Benefit B: +1.22% | Elapsed: 1018.1s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=192...
+    [32/300] H=192 | UV MSE: 0.3027 | MV MSE: 0.2951 | Benefit B: +2.53% | Elapsed: 117.7s
+    [64/300] H=192 | UV MSE: 0.3142 | MV MSE: 0.3093 | Benefit B: +1.56% | Elapsed: 235.5s
+    [96/300] H=192 | UV MSE: 0.3288 | MV MSE: 0.3230 | Benefit B: +1.79% | Elapsed: 353.2s
+    [128/300] H=192 | UV MSE: 0.3280 | MV MSE: 0.3242 | Benefit B: +1.17% | Elapsed: 470.9s
+    [160/300] H=192 | UV MSE: 0.3262 | MV MSE: 0.3227 | Benefit B: +1.07% | Elapsed: 588.5s
+    [192/300] H=192 | UV MSE: 0.3228 | MV MSE: 0.3199 | Benefit B: +0.90% | Elapsed: 706.3s
+    [224/300] H=192 | UV MSE: 0.3173 | MV MSE: 0.3149 | Benefit B: +0.76% | Elapsed: 823.9s
+    [256/300] H=192 | UV MSE: 0.3419 | MV MSE: 0.3381 | Benefit B: +1.11% | Elapsed: 941.7s
+    [288/300] H=192 | UV MSE: 0.3622 | MV MSE: 0.3601 | Benefit B: +0.57% | Elapsed: 1059.2s
+    [300/300] H=192 | UV MSE: 0.3615 | MV MSE: 0.3594 | Benefit B: +0.58% | Elapsed: 1103.5s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=336...
+    [32/300] H=336 | UV MSE: 0.3149 | MV MSE: 0.3097 | Benefit B: +1.68% | Elapsed: 150.8s
+    [64/300] H=336 | UV MSE: 0.3446 | MV MSE: 0.3416 | Benefit B: +0.89% | Elapsed: 301.7s
+    [96/300] H=336 | UV MSE: 0.3480 | MV MSE: 0.3448 | Benefit B: +0.93% | Elapsed: 452.5s
+    [128/300] H=336 | UV MSE: 0.3484 | MV MSE: 0.3464 | Benefit B: +0.57% | Elapsed: 603.2s
+    [160/300] H=336 | UV MSE: 0.3406 | MV MSE: 0.3383 | Benefit B: +0.69% | Elapsed: 754.0s
+    [192/300] H=336 | UV MSE: 0.3369 | MV MSE: 0.3345 | Benefit B: +0.72% | Elapsed: 904.8s
+    [224/300] H=336 | UV MSE: 0.3380 | MV MSE: 0.3359 | Benefit B: +0.63% | Elapsed: 1055.6s
+    [256/300] H=336 | UV MSE: 0.3660 | MV MSE: 0.3623 | Benefit B: +1.02% | Elapsed: 1206.3s
+    [288/300] H=336 | UV MSE: 0.3799 | MV MSE: 0.3767 | Benefit B: +0.86% | Elapsed: 1357.1s
+    [300/300] H=336 | UV MSE: 0.3783 | MV MSE: 0.3750 | Benefit B: +0.86% | Elapsed: 1413.9s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+  --> Horizon H=720...
+    [32/300] H=720 | UV MSE: 0.3973 | MV MSE: 0.3968 | Benefit B: +0.11% | Elapsed: 219.1s
+    [64/300] H=720 | UV MSE: 0.4069 | MV MSE: 0.4080 | Benefit B: -0.25% | Elapsed: 437.8s
+    [96/300] H=720 | UV MSE: 0.4015 | MV MSE: 0.4032 | Benefit B: -0.42% | Elapsed: 656.7s
+    [128/300] H=720 | UV MSE: 0.3903 | MV MSE: 0.3906 | Benefit B: -0.08% | Elapsed: 875.2s
+    [160/300] H=720 | UV MSE: 0.3795 | MV MSE: 0.3785 | Benefit B: +0.25% | Elapsed: 1094.1s
+    [192/300] H=720 | UV MSE: 0.3798 | MV MSE: 0.3780 | Benefit B: +0.47% | Elapsed: 1312.7s
+    [224/300] H=720 | UV MSE: 0.4002 | MV MSE: 0.3972 | Benefit B: +0.75% | Elapsed: 1531.4s
+    [256/300] H=720 | UV MSE: 0.4291 | MV MSE: 0.4230 | Benefit B: +1.42% | Elapsed: 1749.8s
+    [288/300] H=720 | UV MSE: 0.4306 | MV MSE: 0.4250 | Benefit B: +1.30% | Elapsed: 1968.3s
+    [300/300] H=720 | UV MSE: 0.4287 | MV MSE: 0.4227 | Benefit B: +1.40% | Elapsed: 2050.5s
+  --> Saved checkpoint to /root/autodl-tmp/results/e1_ltsf_sampled.csv
+
+================================================================================
+E1 EXPERIMENT COMPLETE!
+Summary Results:
+        dataset  horizon    MSE_UV    MSE_MV  Benefit_B_pct
+0         ETTh1       96  0.371258  0.370976       0.076152
+1         ETTh1      192  0.400856  0.396322       1.131015
+2         ETTh1      336  0.408479  0.393937       3.560146
+3         ETTh1      720  0.436195  0.430323       1.346160
+4         ETTh2       96  0.244334  0.229171       6.205832
+5         ETTh2      192  0.303924  0.282955       6.899600
+6         ETTh2      336  0.343362  0.318635       7.201289
+7         ETTh2      720  0.422283  0.397008       5.985203
+8         ETTm1       96  0.292873  0.292070       0.274074
+9         ETTm1      192  0.331194  0.335687      -1.356553
+10        ETTm1      336  0.368115  0.379652      -3.134005
+11        ETTm1      720  0.453883  0.462593      -1.918978
+12        ETTm2       96  0.178280  0.179883      -0.899463
+13        ETTm2      192  0.254107  0.254288      -0.071338
+14        ETTm2      336  0.323370  0.320825       0.787076
+15        ETTm2      720  0.439743  0.440556      -0.184866
+16      weather       96  0.166799  0.153391       8.038284
+17      weather      192  0.223051  0.216122       3.106671
+18      weather      336  0.302960  0.299010       1.303833
+19      weather      720  0.509250  0.479923       5.758824
+20  electricity       96  0.115899  0.112881       2.603814
+21  electricity      192  0.136015  0.133015       2.205251
+22  electricity      336  0.157841  0.154483       2.127539
+23  electricity      720  0.204011  0.198168       2.864427
+24        solar       96  0.208676  0.224785      -7.719626
+25        solar      192  0.239841  0.270257     -12.681863
+26        solar      336  0.270385  0.326152     -20.625021
+27        solar      720  0.303940  0.401049     -31.949943
+28      traffic       96  0.343139  0.338944       1.222513
+29      traffic      192  0.361524  0.359430       0.579359
+30      traffic      336  0.378261  0.375018       0.857218
+31      traffic      720  0.428700  0.422710       1.397110
+================================================================================

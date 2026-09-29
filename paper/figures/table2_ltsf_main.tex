@@ -1,0 +1,44 @@
+\begin{table*}[t]
+\centering
+\caption{Multivariate vs. Univariate performance of TimesFM-3 across standard LTSF benchmarks. $B$ denotes relative Benefit (\%). Bold numbers indicate superior performance.}
+\label{tab:ltsf_main}
+\small
+\begin{tabular}{ll|cc|cc|c}
+\toprule
+\textbf{Dataset} & \textbf{Horizon} & \textbf{MSE (UV)} & \textbf{MAE (UV)} & \textbf{MSE (MV)} & \textbf{MAE (MV)} & \textbf{Benefit $B$ (\%)} \\
+\midrule
+ETTh1 & 96 & 0.371  & 0.368  &  \textbf{0.371} &  \textbf{0.366} & +0.08\% \\
+ETTh1 & 192 & 0.401  & 0.386  &  \textbf{0.396} &  \textbf{0.384} & +1.13\% \\
+ETTh1 & 336 & 0.408  & 0.398  &  \textbf{0.394} &  \textbf{0.394} & +3.56\% \\
+ETTh1 & 720 & 0.436  & \textbf{0.429}  &  \textbf{0.430} &  0.430 & +1.35\% \\
+ETTh2 & 96 & 0.244  & 0.297  &  \textbf{0.229} &  \textbf{0.288} & +6.21\% \\
+ETTh2 & 192 & 0.304  & 0.340  &  \textbf{0.283} &  \textbf{0.328} & +6.90\% \\
+ETTh2 & 336 & 0.343  & 0.374  &  \textbf{0.319} &  \textbf{0.360} & +7.20\% \\
+ETTh2 & 720 & 0.422  & 0.433  &  \textbf{0.397} &  \textbf{0.418} & +5.99\% \\
+ETTm1 & 96 & 0.293  & 0.323  &  \textbf{0.292} &  \textbf{0.321} & +0.27\% \\
+ETTm1 & 192 & \textbf{0.331}  & 0.349  &  0.336 &  \textbf{0.348} & -1.36\% \\
+ETTm1 & 336 & \textbf{0.368}  & 0.372  &  0.380 &  \textbf{0.371} & -3.13\% \\
+ETTm1 & 720 & \textbf{0.454}  & 0.413  &  0.463 &  \textbf{0.413} & -1.92\% \\
+ETTm2 & 96 & \textbf{0.178}  & \textbf{0.243}  &  0.180 &  0.243 & -0.90\% \\
+ETTm2 & 192 & \textbf{0.254}  & 0.292  &  0.254 &  \textbf{0.292} & -0.07\% \\
+ETTm2 & 336 & 0.323  & 0.336  &  \textbf{0.321} &  \textbf{0.334} & +0.79\% \\
+ETTm2 & 720 & \textbf{0.440}  & 0.402  &  0.441 &  \textbf{0.398} & -0.18\% \\
+electricity & 96 & 0.116  & 0.210  &  \textbf{0.113} &  \textbf{0.208} & +2.60\% \\
+electricity & 192 & 0.136  & 0.229  &  \textbf{0.133} &  \textbf{0.226} & +2.21\% \\
+electricity & 336 & 0.158  & 0.248  &  \textbf{0.154} &  \textbf{0.245} & +2.13\% \\
+electricity & 720 & 0.204  & 0.285  &  \textbf{0.198} &  \textbf{0.281} & +2.86\% \\
+solar & 96 & \textbf{0.209}  & \textbf{0.202}  &  0.225 &  0.207 & -7.72\% \\
+solar & 192 & \textbf{0.240}  & \textbf{0.222}  &  0.270 &  0.234 & -12.68\% \\
+solar & 336 & \textbf{0.270}  & \textbf{0.242}  &  0.326 &  0.268 & -20.63\% \\
+solar & 720 & \textbf{0.304}  & \textbf{0.263}  &  0.401 &  0.300 & -31.95\% \\
+traffic & 96 & 0.343  & \textbf{0.214}  &  \textbf{0.339} &  0.215 & +1.22\% \\
+traffic & 192 & 0.362  & \textbf{0.225}  &  \textbf{0.359} &  0.226 & +0.58\% \\
+traffic & 336 & 0.378  & \textbf{0.235}  &  \textbf{0.375} &  0.235 & +0.86\% \\
+traffic & 720 & 0.429  & 0.260  &  \textbf{0.423} &  \textbf{0.260} & +1.40\% \\
+weather & 96 & 0.167  & 0.195  &  \textbf{0.153} &  \textbf{0.183} & +8.04\% \\
+weather & 192 & 0.223  & 0.245  &  \textbf{0.216} &  \textbf{0.241} & +3.11\% \\
+weather & 336 & 0.303  & 0.296  &  \textbf{0.299} &  \textbf{0.296} & +1.30\% \\
+weather & 720 & 0.509  & 0.378  &  \textbf{0.480} &  \textbf{0.373} & +5.76\% \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,436 @@
+% =====================================================================
+% 重写稿（2026-09-28）
+% - 引言、相关工作、诊断框架、实验设置：已按核实过的事实重写，可直接使用。
+% - 5.1（E1）：使用 e1_ltsf_sampled.csv 的数字；补上置信区间后更新。
+% - 5.2（E2）：使用 e2_recomputed.csv（Weather，按"先求和再求比值"重算的 R）；
+%   E2 重跑（固定分组、64 个目标、≥150 个窗口）后整体替换。
+% - 5.3（E3）、5.4（E5）：原结果存在实现错误，重跑前只保留结构，不写结论。
+% - 参考文献使用 references_fixed.bib（key 与原稿一致）。
+% =====================================================================
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % 与 Computer Modern 同一字形的可缩放版本，避免 T1 位图字体
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[caption=false]{subfig}
+\usepackage[pdfauthor={},hidelinks]{hyperref}
+
+\newif\ifshowtodos
+\showtodostrue
+\newcommand{\todo}[1]{\ifshowtodos\textcolor{red}{[TODO: #1]}\fi}
+
+\newcommand{\MV}{\textsc{mv}}
+\newcommand{\UV}{\textsc{uv}}
+\newcommand{\Ben}{B}
+\newcommand{\Rel}{R}
+\newcommand{\Sen}{S}
+\newcommand{\GC}{\mathrm{GC}}
+\newcommand{\tfm}{TimesFM-3}
+
+\begin{document}
+
+\title{Does Variate Attention Pay Off? Probing Cross-Channel Use in
+Multivariate Time-Series Foundation Models}
+\titlerunning{Probing Cross-Channel Use in Multivariate TSFMs}
+\author{Anonymous Author(s)}
+\authorrunning{Anonymous}
+\institute{Anonymous Institution}
+\maketitle
+
+\begin{abstract}
+% 暂定稿，E2/E3/E5 重跑后更新数字；控制在 200 词以内。
+Multivariate time-series foundation models (TSFMs) such as \tfm{} let every
+channel attend to the others and report better leaderboard ranks than their
+univariate counterparts. Whether these gains come from reading other channels
+is unknown. We probe \tfm{} from the inside: we switch its variate attention
+between univariate and multivariate modes on identical windows, corrupt the
+context channels in controlled ways while keeping the target intact, and
+compare the model with Kalman-filter oracles on synthetic systems whose
+cross-channel information is known. On eight standard benchmarks the
+multivariate mode changes the error by between $-19.5\%$ and $+6.6\%$
+depending on the dataset, and on Solar-Energy the loss grows with the
+horizon. On Weather, most of the gain survives when the context channels are
+replaced by misaligned segments of the same channels, but it disappears, and
+turns into a loss, when they are replaced by noise; a leading-indicator
+channel, in contrast, is exploited. \todo{E3 and E5 findings.} We release a
+diagnostic protocol and derive guidelines for grouping channels when TSFMs
+are deployed on high-dimensional sensor data.
+\keywords{Time series forecasting \and Foundation models \and
+Channel dependence \and Multivariate forecasting \and Model probing}
+\end{abstract}
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+
+Time-series foundation models (TSFMs) forecast unseen series without
+task-specific training~\cite{das2024timesfm,ansari2024chronos,woo2024moirai}.
+Most of them began as univariate forecasters, and the newest generation adds
+attention across channels. \tfm{}~\cite{timesfm3_blog2026} inserts a full
+variate-attention sublayer into each of its 20 layers and reports that its
+multivariate mode improves the average rank on three public benchmarks.
+Chronos-2~\cite{ansari2025chronos2} shares information within groups of
+series through group attention.
+
+The evidence that cross-channel attention helps is less clear than these
+reports suggest. Moirai~\cite{woo2024moirai} attended across all variates,
+yet its successor, Moirai 2.0~\cite{liu2025moirai2}, forecasts
+each variate independently. Liu et al.~\cite{liu2026falconx} observe that Chronos-2
+performs almost identically on GIFT-Eval with and without group attention.
+For supervised models, channel-independent training has long been hard to
+beat~\cite{nie2023patchtst,zeng2023dlinear}: Han et
+al.~\cite{han2024capacity} attribute this to a trade-off between capacity
+and robustness under distribution drift, and Abdelmalak et
+al.~\cite{abdelmalak2025lookback} show that standard benchmarks contain weak
+inter-channel dependence. Leaderboard gains of a multivariate TSFM are
+therefore compatible with two different explanations: the model reads useful
+information from other channels, or it benefits from them in a cruder way,
+for example by pooling shared seasonal patterns.
+
+Aggregate scores cannot separate these explanations, because they compare
+different models or average over heterogeneous tasks. We instead probe a
+single model from the inside. Keeping the target channel and the weights
+fixed, we switch variate attention between univariate (\UV) and multivariate
+(\MV) modes, intervene on the context channels, and measure how accuracy and
+the forecast itself respond. We ask four questions:
+\textbf{RQ1} Where does the \MV{} mode help, and where does it hurt?
+\textbf{RQ2} Which properties of the context channels does the model rely on?
+\textbf{RQ3} On systems with known cross-channel information, how much of it
+does the model extract?
+\textbf{RQ4} How many channels, and which ones, should be supplied when a
+dataset has hundreds of them?
+
+Our contributions are as follows.
+\begin{itemize}
+  \item A within-model diagnostic protocol with four measures (benefit,
+        reliance, sensitivity and oracle gap closure) and a set of
+        interventions with positive and negative controls
+        (Sect.~\ref{sec:framework}).
+  \item An analysis of how \tfm{} actually processes more than 32 channels:
+        its reference implementation splits them into fixed blocks of 32 in
+        column order, so the ``all channels attend to all channels'' setting
+        does not occur on high-dimensional benchmarks
+        (Sect.~\ref{sec:setup}).
+  \item Empirical findings on eight benchmarks \todo{and synthetic systems,
+        and a comparison with Chronos-2 and supervised baselines}
+        (Sect.~\ref{sec:results}).
+  \item Guidelines for selecting channels and deciding between the two modes
+        when TSFMs are deployed on sensor data (Sect.~\ref{sec:discussion}).
+\end{itemize}
+
+% =====================================================================
+\section{Related Work}\label{sec:related}
+
+\subsubsection{Multivariate TSFMs.}
+Cross-channel mechanisms in TSFMs differ in scope and cost.
+Moirai~\cite{woo2024moirai} flattens all variates into one sequence and
+distinguishes them with learned binary attention biases, so its cost grows
+quadratically with the number of variates times the sequence length.
+Chronos-2~\cite{ansari2025chronos2} applies group attention at each patch
+index and learns multivariate behavior from synthetic data in which
+dependencies are imposed on univariate series. \tfm{}~\cite{timesfm3_blog2026}
+and Toto~2.0~\cite{garg2026toto2} alternate causal attention along time with
+full attention across variates, whereas TiRex-2~\cite{carlsen2026tirex2} lets
+targets read covariates but not the reverse. Sun et al.~\cite{rmisc2026}
+report that replacing synthetic multivariate pretraining data with real
+multivariate data improves generalization, which suggests that synthetic data
+alone may teach limited cross-channel skill. The closest work to ours is
+Falcon-X~\cite{liu2026falconx}, whose authors observe that Chronos-2 is
+nearly insensitive to disabling group attention and that its attention maps
+are similar for dissimilar inputs. They use this observation to motivate a new
+architecture; we turn it into a systematic diagnosis, apply it to \tfm, and
+characterize when variate attention helps, is idle, or hurts.
+
+\subsubsection{Channel independence and dependence.}
+Channel-independent models, e.g., PatchTST~\cite{nie2023patchtst} and
+DLinear~\cite{zeng2023dlinear}, match or outperform many channel-dependent
+Transformers~\cite{zhou2021informer,wu2021autoformer,zhou2022fedformer},
+while iTransformer~\cite{liu2024itransformer} treats each variate as a token.
+Han et al.~\cite{han2024capacity} explain the advantage of channel
+independence as robustness to drift. Abdelmalak et
+al.~\cite{abdelmalak2025lookback} show that it is partly an artifact of
+untuned lookback windows and of weak dependence in standard datasets:
+channel-independent models win 21 of 28 comparisons on standard benchmarks,
+but channel-dependent models win 18 of 24 on chaotic ODE systems. Song et
+al.~\cite{song2026cloc} select a channel-communication budget per dataset on
+validation data and find that suppressing communication is preferable on ETT,
+whereas local and global communication help on Electricity and Solar-Energy.
+Leading indicators are a major source of cross-channel
+information~\cite{lift2024}, and channel-dependent models can overfit the
+channel order~\cite{cpiri2026}. These studies train a model per dataset; we
+ask the corresponding questions for one pretrained model at inference time,
+where the use of other channels can be switched off and manipulated without
+retraining.
+
+\subsubsection{Evaluating and probing TSFMs.}
+Benchmarks such as GIFT-Eval~\cite{gifteval2024},
+fev-bench~\cite{fevbench2025} and TIME~\cite{timebench2026} compare models
+across many tasks, and fev-bench reports that natively multivariate models
+lead on multivariate tasks. Such comparisons confound the effect of
+cross-channel attention with every other difference between models. Because
+attention weights need not explain predictions~\cite{jain2019attention}, we
+intervene on inputs rather than read attention maps, and use surrogate
+series~\cite{schreiber1996surrogate} to destroy cross-channel phase relations
+while preserving each channel's spectrum and marginal distribution.
+
+% =====================================================================
+\section{Diagnostic Framework}\label{sec:framework}
+
+\subsection{Modes and Interventions}
+For a test window $w$ and target channel $i$, the model receives the target
+history and the histories of a set of context channels $\mathcal{C}_i$ and
+returns a forecast of length $H$. In \UV{} mode $\mathcal{C}_i=\emptyset$;
+in \MV{} mode $\mathcal{C}_i$ contains the channels processed jointly with
+$i$. An intervention $\pi$ modifies only the channels in $\mathcal{C}_i$ and
+never the target. We write $\hat y^{\UV}$, $\hat y^{\MV}$ and $\hat y^{\pi}$
+for the resulting forecasts and $e(\cdot)$ for their mean squared error on the
+standardized scale.
+
+\subsection{Measures}
+\emph{Benefit} measures whether the \MV{} mode helps:
+\begin{equation}
+  \Ben = \frac{\sum_{w,i} e(\hat y^{\UV}_{w,i}) - \sum_{w,i} e(\hat y^{\MV}_{w,i})}
+              {\sum_{w,i} e(\hat y^{\UV}_{w,i})}.
+\end{equation}
+\emph{Reliance} measures how much of the benefit an intervention removes:
+\begin{equation}
+  \Rel_\pi = \frac{\sum_{w,i} e(\hat y^{\pi}_{w,i}) - \sum_{w,i} e(\hat y^{\MV}_{w,i})}
+                  {\sum_{w,i} e(\hat y^{\UV}_{w,i}) - \sum_{w,i} e(\hat y^{\MV}_{w,i})}.
+\end{equation}
+$\Rel_\pi\approx 1$ means that the benefit depends on what $\pi$ destroys,
+$\Rel_\pi\approx 0$ means that it does not, and $\Rel_\pi>1$ means that the
+corrupted channels make the forecast worse than using no context at all.
+Errors are summed before the ratio is taken, because per-window ratios are
+unstable when the two modes perform almost equally. We report $\Rel_\pi$
+only when the confidence interval of $\Ben$ excludes zero; otherwise we
+report the error change directly. \emph{Sensitivity}
+$\Sen_\pi=\operatorname{mean}_{w,i,h}|\hat y^{\pi}-\hat y^{\MV}|/\sigma_i$
+measures how much the forecast moves, regardless of accuracy, where
+$\sigma_i$ is the training-set standard deviation of channel $i$.
+On synthetic linear Gaussian systems, a Kalman filter with the true parameters
+gives the lowest achievable error when observing only the target
+($e^{\UV}_\star$) or all channels ($e^{\MV}_\star$); \emph{gap closure}
+$\GC=(e^{\UV}-e^{\MV})/(e^{\UV}_\star-e^{\MV}_\star)$ is the share of this
+available improvement that the model realizes.
+
+\subsection{Interventions and Controls}
+Table~\ref{tab:interventions} lists the interventions. The negative controls
+must leave the forecast (N1) or its accuracy (N2, N3) unchanged, and the
+positive control P1 must improve it; together they validate the protocol
+before the remaining interventions are interpreted.
+
+\begin{table}[t]
+  \centering
+  \caption{Interventions on the context channels $\mathcal{C}_i$. The target
+  channel is never modified.}
+  \label{tab:interventions}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    ID & Intervention & What it removes \\
+    \midrule
+    N1 & permute channels within $\mathcal{C}_i$ & nothing \\
+    N2 & add a copy of the target               & nothing new \\
+    N3 & add the target lagged by 16 steps      & nothing new \\
+    N4 & replace by Gaussian noise, matched moments & all information \\
+    I1 & shuffle time steps in each channel & temporal structure \\
+    I2 & same channels $\geq$30 days earlier, unaligned & alignment, calendar phase \\
+    I3 & as I2, shifted by whole weeks & alignment only \\
+    I4 & IAAFT surrogate of each channel & cross-channel phase \\
+    I6 & circular shift by 24 steps              & fine alignment \\
+    P1 & add $y_i(t+k)+\varepsilon$, $k\in\{16,32\}$ & --- (positive control) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Synthetic Systems}
+\todo{Define the generators (low-rank factor, local blocks, structural drift,
+lead--lag, independent channels) and the Kalman oracles after the oracle has
+passed its unit tests (multivariate oracle error $\leq$ univariate oracle
+error; empirical error matches the Riccati steady state).}
+
+% =====================================================================
+\section{Experimental Setup}\label{sec:setup}
+
+\subsubsection{Model.}
+We use the public \tfm{} checkpoint (330M parameters) and its PyTorch
+reference implementation\footnote{Repository commit \texttt{e31dadd}
+(2026-09-15).}. Each of its 20 layers applies causal attention along time with
+rotary position embeddings, then attention across variates without any
+position encoding, then a feed-forward block. The horizon is appended as
+masked patches and forecast in a single forward pass. Because the variate
+attention carries no position information, it is equivariant to channel
+permutations, which N1 verifies.
+
+\subsubsection{How \tfm{} handles more than 32 channels.}
+The reference evaluator places at most 32 variates in one forward pass, which
+matches the \texttt{max\_variates} value in the released configuration. When
+a dataset has more channels, the evaluator splits them into consecutive blocks
+of 32 in column order and pads the last block by repeating the first channels.
+Traffic (862 channels) is thus processed as 27 independent blocks, and each
+channel attends only to the other members of its block. Unless stated
+otherwise, our \MV{} results follow this reference protocol.
+
+\subsubsection{Data.}
+We use ETTh1, ETTh2, ETTm1, ETTm2 (7 channels), Weather (21),
+Solar-Energy (137), Electricity (321) and Traffic (862), with the standard
+chronological splits (12/4/4 months for ETT, 7:1:2 otherwise), standardization
+by training-set statistics, a context of 512 steps, and
+horizons of 96, 192, 336 and 720 steps. For each dataset we evaluate 300 test windows
+spaced evenly over the test period. Following the public pretraining
+inventory~\cite{gifteval2024}, the pretraining data likely contain the same
+862 Traffic sensors, so Traffic is not a clean zero-shot test; the
+inventory contains none of the ETT datasets.
+
+\subsubsection{Protocol.}
+All runs use FP32 on one RTX 4090 with the evaluator's default symmetric
+averaging; we disable clipping of forecasts at zero, which would bias
+standardized data. \UV{} and \MV{} forecasts are computed on the same windows,
+so all comparisons are paired. \todo{95\% confidence intervals from 2{,}000
+bootstrap resamples of windows; Wilcoxon signed-rank tests with Holm
+correction.}
+
+% =====================================================================
+\section{Results}\label{sec:results}
+
+\subsection{RQ1: Where Does the Multivariate Mode Help?}\label{sec:rq1}
+
+\begin{table}[t]
+  \centering
+  \caption{\tfm{} in \UV{} and \MV{} mode. MSE is averaged over the four
+  horizons; $\Ben$ (\%) is given for the average and for each horizon.
+  Positive $\Ben$ means that the \MV{} mode is better. 300 test windows per
+  dataset. \todo{add 95\% CIs.}}
+  \label{tab:ltsf}
+  \setlength{\tabcolsep}{3.6pt}
+  \begin{tabular}{@{}lrccrrrrr@{}}
+    \toprule
+    & & \multicolumn{2}{c}{MSE} & & \multicolumn{4}{c}{$\Ben$ (\%) by horizon} \\
+    \cmidrule(lr){3-4}\cmidrule(l){6-9}
+    Dataset & $N$ & \UV & \MV & $\Ben$ (\%) & 96 & 192 & 336 & 720 \\
+    \midrule
+    ETTh1       &   7 & 0.404 & 0.398 &  $+1.6$ &  $+0.1$ &  $+1.1$ &  $+3.6$ &  $+1.3$ \\
+    ETTh2       &   7 & 0.329 & 0.307 &  $+6.6$ &  $+6.2$ &  $+6.9$ &  $+7.2$ &  $+6.0$ \\
+    ETTm1       &   7 & 0.362 & 0.368 &  $-1.7$ &  $+0.3$ &  $-1.4$ &  $-3.1$ &  $-1.9$ \\
+    ETTm2       &   7 & 0.299 & 0.299 &  $0.0$  &  $-0.9$ &  $-0.1$ &  $+0.8$ &  $-0.2$ \\
+    Weather     &  21 & 0.301 & 0.287 &  $+4.5$ &  $+8.0$ &  $+3.1$ &  $+1.3$ &  $+5.8$ \\
+    Solar-Energy& 137 & 0.256 & 0.306 & $-19.5$ &  $-7.7$ & $-12.7$ & $-20.6$ & $-32.0$ \\
+    Electricity & 321 & 0.153 & 0.150 &  $+2.5$ &  $+2.6$ &  $+2.2$ &  $+2.1$ &  $+2.9$ \\
+    Traffic$^\dagger$ & 862 & 0.378 & 0.374 & $+1.0$ & $+1.2$ & $+0.6$ & $+0.9$ & $+1.4$ \\
+    \bottomrule
+    \multicolumn{9}{@{}l}{\footnotesize $^\dagger$Likely seen during pretraining.}
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Finding 1. The \MV{} mode helps on some datasets, is neutral
+on others, and hurts badly on Solar-Energy.}
+Table~\ref{tab:ltsf} shows gains of $+6.6\%$ on ETTh2, $+4.5\%$ on Weather and
+$+2.5\%$ on Electricity, no effect on ETTm2, a small loss on ETTm1, and a loss
+of $19.5\%$ on Solar-Energy that grows from $7.7\%$ at $H=96$ to $32.0\%$ at
+$H=720$. The pattern only partly follows the per-dataset budgets selected for
+supervised models: Song et al.~\cite{song2026cloc} suppress channel
+communication on all four ETT datasets, whereas \tfm{} gains on ETTh2. A
+zero-shot model and a model trained per dataset therefore need not agree on
+which datasets reward cross-channel modeling.
+
+\noindent\textbf{The Solar-Energy loss is concentrated in a minority of
+windows.} At $H=96$ the median window is $7.6\%$ \emph{better} in \MV{} mode,
+while the mean is $7.7\%$ worse; at $H=720$ the median change is $-18.1\%$.
+\todo{Relate per-window losses to time of day and to the variance of the
+context channels (night-time channels are constant at zero).}
+
+\subsection{RQ2: What Does the Model Rely On?}\label{sec:rq2}
+% 数字来自 e2_recomputed.csv（Weather）；E2 重跑后整体替换。
+
+\begin{table}[t]
+  \centering
+  \caption{Interventions on Weather, where the \MV{} mode reduces MSE by
+  $\Ben=12.4\%$ [3.1, 24.1] on the probed windows. $\Delta$MSE is relative to
+  the \MV{} mode; brackets are 95\% bootstrap intervals over windows.}
+  \label{tab:e2}
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}llrr@{}}
+    \toprule
+    ID & Intervention & $\Delta$MSE (\%) & $\Rel_\pi$ \\
+    \midrule
+    N1 & permute channels         &   $0.0$ & $0.00$ \\
+    N2 & copy of target           &  $+1.0$ & $0.07$ [$-0.06$, $0.16$] \\
+    N3 & lagged copy of target    &  $+0.6$ & $0.04$ [$-0.02$, $0.12$] \\
+    I6 & shift by 24 steps        &  $+2.0$ & $0.15$ [$-0.27$, $0.48$] \\
+    I2 & unaligned segment        &  $+2.6$ & $0.18$ [$-0.15$, $0.75$] \\
+    I4 & IAAFT surrogate          &  $+6.5$ & $0.46$ [$0.13$, $1.30$] \\
+    I3 & week-aligned segment     &  $+6.7$ & $0.48$ [$0.11$, $1.31$] \\
+    I1 & shuffled time steps      & $+13.6$ & $0.97$ [$0.53$, $3.10$] \\
+    N4 & Gaussian noise           & $+20.1$ & $1.42$ [$0.88$, $3.64$] \\
+    \midrule
+    P1 & leading indicator, $k=16$ & $-10.0$ & $-0.71$ \\
+    P1 & leading indicator, $k=32$ & $-18.6$ & $-1.32$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Finding 2. On Weather, the gain survives misaligned context
+but not unstructured context.}
+Table~\ref{tab:e2} orders the interventions by how much of the benefit they
+remove. Replacing the context channels with the same channels from another,
+unaligned period (I2) or shifting them by 24 steps (I6) removes less than a
+fifth of the benefit, whereas shuffling their time steps (I1) removes all of
+it and Gaussian noise (N4) makes the forecast worse than using no context at
+all. The model therefore benefits mainly from context that looks like
+realistic weather signals, and much less from their exact alignment with the
+target, which is closer to pooling shared patterns than to reading
+synchronized co-movement. \todo{I2 retains more of the benefit than the
+week-aligned I3, contrary to expectation; the intervals overlap, so confirm
+with the larger rerun before interpreting.}
+
+\noindent\textbf{Finding 3. The model can exploit a genuine leading
+indicator, and cannot ignore noise.}
+The negative controls behave as required: permutation leaves the forecast
+unchanged, and redundant copies of the target barely change the error. A
+channel that reveals the target 16 or 32 steps ahead lowers the error by
+$10.0\%$ and $18.6\%$, so the variate attention can route predictive
+information when it exists. Noise channels, however, raise the error by
+$20.1\%$: the model does not learn to disregard uninformative context.
+\todo{Report Electricity, Solar and Traffic after the rerun with fixed
+groups; report $\Delta$MSE instead of $\Rel$ where the interval of $\Ben$
+contains zero.}
+
+\subsection{RQ3: Synthetic Systems with Known Cross-Channel Information}\label{sec:rq3}
+\todo{Rerun after the Kalman oracle passes its unit tests. The current results
+are not usable: the model beats the multivariate oracle in 30 of 39
+configurations, which is impossible for a correct oracle.}
+
+\subsection{RQ4: How Many Channels, and Which?}\label{sec:rq4}
+\todo{Rerun with $K>32$ passed directly to the forecaster rather than through
+the evaluator's 32-channel blocks; the current $K=64$ and $K=128$ results are
+identical to $K=32$ because the model never saw more than 32 channels.
+Current data (for $K\leq 32$, to be confirmed): on Electricity, random
+selection is slightly better than top-$K$ selection at every $K\geq 4$; on
+Solar-Energy, every added channel increases the error for all three
+strategies.}
+
+% =====================================================================
+\section{Discussion and Guidelines}\label{sec:discussion}
+\todo{Write after the reruns. Candidate guidelines that the current data
+already support: (1) validate the \MV{} mode per dataset before deployment,
+since it can lose up to 32\% (Solar-Energy); (2) never pad channel groups with
+noise-like or unrelated series, because the model does not ignore them.
+Mode-selection thresholds and channel-budget rules require E5 and E7.}
+
+\subsubsection{Limitations.}
+We probe one model in depth; Chronos-2 and supervised baselines are compared
+on a reduced protocol \todo{E4}. Traffic is likely part of the pretraining
+data. Interventions change the input distribution, so part of their effect may
+reflect distribution shift rather than the loss of specific information; the
+negative controls bound this effect.
+
+\section{Conclusion}\label{sec:conclusion}
+\todo{Write last.}
+
+\bibliographystyle{splncs04}
+\bibliography{references_fixed}
+
+\end{document}

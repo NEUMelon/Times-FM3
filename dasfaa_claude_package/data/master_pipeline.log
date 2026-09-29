@@ -1,0 +1,756 @@
+[2026-09-28 17:21:23] [MASTER PIPELINE] ================================================================================
+[2026-09-28 17:21:23] [MASTER PIPELINE] MASTER ORCHESTRATOR INITIALIZED
+[2026-09-28 17:21:23] [MASTER PIPELINE] ================================================================================
+[2026-09-28 17:21:23] [MASTER PIPELINE] Monitoring E1 background execution...
+[2026-09-28 17:21:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:21:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:21:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:22:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:22:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:22:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:22:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:23:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:23:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:23:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:23:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:24:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:24:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:24:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:24:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:25:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:25:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:25:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:25:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:26:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:26:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:26:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:26:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:27:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:27:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:27:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:27:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:28:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:28:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:28:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:28:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:29:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:29:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:29:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:29:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:30:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:30:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:30:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:30:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:31:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:31:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:31:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:31:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:32:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:32:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:32:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:32:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:33:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:33:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:33:38] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:33:53] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:34:08] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:34:23] [MASTER PIPELINE] E1 Progress: 23/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:34:38] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:34:53] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:35:08] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:35:23] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:35:39] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:35:54] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:36:09] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:36:24] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:36:39] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:36:54] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:37:09] [MASTER PIPELINE] E1 Progress: 24/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:37:24] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:37:39] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:37:54] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:38:09] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:38:24] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:38:39] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:38:54] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:39:09] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:39:24] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:39:39] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:39:54] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:40:09] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:40:24] [MASTER PIPELINE] E1 Progress: 25/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:40:39] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:40:54] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:41:09] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:41:24] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:41:39] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:41:54] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:42:09] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:42:24] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:42:39] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:42:54] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:43:09] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:43:24] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:43:39] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:43:54] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:44:09] [MASTER PIPELINE] E1 Progress: 26/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:44:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:44:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:44:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:45:09] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:45:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:45:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:45:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:46:09] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:46:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:46:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:46:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:47:09] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:47:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:47:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:47:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:48:09] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:48:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:48:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:48:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:49:09] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:49:24] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:49:39] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:49:54] [MASTER PIPELINE] E1 Progress: 27/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:50:09] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:50:24] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:50:39] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:50:54] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:51:09] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:51:24] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:51:39] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:51:54] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:52:09] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:52:24] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:52:39] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:52:54] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:53:09] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:53:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:53:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:53:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:54:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:54:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:54:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:54:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:55:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:55:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:55:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:55:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:56:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:56:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:56:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:56:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:57:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:57:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:57:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:57:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:58:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:58:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:58:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:58:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:59:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:59:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:59:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 17:59:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:00:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:00:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:00:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:00:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:01:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:01:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:01:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:01:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:02:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:02:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:02:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:02:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:03:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:03:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:03:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:03:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:04:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:04:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:04:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:04:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:05:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:05:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:05:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:05:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:06:10] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:06:25] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:06:40] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:06:55] [MASTER PIPELINE] E1 Progress: 28/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:07:10] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:07:25] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:07:40] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:07:55] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:08:10] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:08:25] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:08:40] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:08:55] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:09:10] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:09:25] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:09:40] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:09:55] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:10:10] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:10:25] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:10:40] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:10:55] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:11:10] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:11:25] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:11:40] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:11:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:12:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:12:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:12:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:12:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:13:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:13:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:13:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:13:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:14:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:14:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:14:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:14:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:15:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:15:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:15:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:15:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:16:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:16:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:16:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:16:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:17:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:17:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:17:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:17:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:18:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:18:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:18:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:18:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:19:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:19:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:19:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:19:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:20:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:20:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:20:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:20:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:21:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:21:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:21:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:21:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:22:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:22:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:22:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:22:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:23:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:23:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:23:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:23:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:24:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:24:26] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:24:41] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:24:56] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:25:11] [MASTER PIPELINE] E1 Progress: 29/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:25:26] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:25:41] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:25:56] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:26:11] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:26:26] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:26:41] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:26:56] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:27:11] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:27:26] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:27:41] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:27:56] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:28:11] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:28:26] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:28:41] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:28:56] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:29:11] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:29:26] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:29:41] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:29:56] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:30:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:30:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:30:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:30:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:31:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:31:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:31:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:31:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:32:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:32:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:32:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:32:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:33:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:33:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:33:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:33:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:34:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:34:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:34:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:34:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:35:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:35:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:35:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:35:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:36:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:36:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:36:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:36:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:37:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:37:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:37:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:37:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:38:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:38:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:38:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:38:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:39:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:39:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:39:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:39:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:40:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:40:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:40:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:40:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:41:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:41:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:41:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:41:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:42:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:42:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:42:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:42:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:43:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:43:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:43:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:43:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:44:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:44:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:44:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:44:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:45:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:45:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:45:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:45:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:46:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:46:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:46:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:46:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:47:12] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:47:27] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:47:42] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:47:57] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:48:13] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:48:28] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:48:43] [MASTER PIPELINE] E1 Progress: 30/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:48:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:49:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:49:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:49:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:49:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:50:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:50:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:50:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:50:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:51:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:51:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:51:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:51:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:52:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:52:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:52:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:52:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:53:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:53:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:53:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:53:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:54:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:54:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:54:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:54:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:55:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:55:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:55:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:55:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:56:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:56:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:56:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:56:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:57:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:57:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:57:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:57:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:58:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:58:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:58:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:58:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:59:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:59:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:59:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 18:59:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:00:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:00:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:00:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:00:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:01:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:01:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:01:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:01:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:02:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:02:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:02:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:02:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:03:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:03:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:03:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:03:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:04:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:04:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:04:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:04:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:05:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:05:28] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:05:43] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:05:58] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:06:13] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:06:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:06:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:06:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:07:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:07:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:07:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:07:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:08:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:08:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:08:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:08:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:09:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:09:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:09:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:09:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:10:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:10:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:10:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:10:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:11:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:11:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:11:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:11:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:12:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:12:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:12:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:12:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:13:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:13:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:13:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:13:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:14:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:14:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:14:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:14:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:15:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:15:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:15:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:15:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:16:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:16:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:16:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:16:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:17:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:17:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:17:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:17:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:18:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:18:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:18:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:18:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:19:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:19:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:19:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:19:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:20:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:20:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:20:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:20:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:21:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:21:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:21:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:21:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:22:14] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:22:29] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:22:44] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:22:59] [MASTER PIPELINE] E1 Progress: 31/32 checkpoints recorded so far. Running processes: 1
+[2026-09-28 19:23:14] [MASTER PIPELINE] E1 Progress: 32/32 checkpoints recorded so far. Running processes: 0
+[2026-09-28 19:23:14] [MASTER PIPELINE] E1 has successfully completed all 32 checkpoints!
+[2026-09-28 19:23:14] [MASTER PIPELINE] Starting E2: Target-Centric Interventions...
+[2026-09-28 19:23:14] [MASTER PIPELINE] Command: python3 -u /root/autodl-tmp/DASFAA/experiments/run_e2_interventions.py --datasets ETTh1 weather electricity --horizon 96 --samples 100
+================================================================================
+STARTING E2: TARGET-CENTRIC INTERVENTIONS EXPERIMENT
+Horizon: 96, Context Length: 512, Windows: 100, Seed: 42
+================================================================================
+Loading TimesFM-3.0 Evaluator from /root/autodl-tmp/models/timesfm-3.0-pytorch on cuda...
+Loading weights from local directory
+TimesFM-3.0 successfully initialized (try_gc monkeypatched).
+
+>>> Running Interventions on Dataset: ETTh1
+  [25/100] Evaluated interventions | Elapsed: 107.9s
+  [50/100] Evaluated interventions | Elapsed: 214.5s
+  [75/100] Evaluated interventions | Elapsed: 320.7s
+  [100/100] Evaluated interventions | Elapsed: 426.8s
+  --> Saved E2 checkpoint to /root/autodl-tmp/results/e2_interventions_summary.csv
+
+>>> Running Interventions on Dataset: weather
+  [25/100] Evaluated interventions | Elapsed: 251.4s
+  [50/100] Evaluated interventions | Elapsed: 504.4s
+  [75/100] Evaluated interventions | Elapsed: 756.4s
+  [100/100] Evaluated interventions | Elapsed: 1008.1s
+  --> Saved E2 checkpoint to /root/autodl-tmp/results/e2_interventions_summary.csv
+
+>>> Running Interventions on Dataset: electricity
+  [25/100] Evaluated interventions | Elapsed: 2822.4s
+  [50/100] Evaluated interventions | Elapsed: 5635.9s
+  [75/100] Evaluated interventions | Elapsed: 8452.3s
+  [100/100] Evaluated interventions | Elapsed: 11261.6s
+  --> Saved E2 checkpoint to /root/autodl-tmp/results/e2_interventions_summary.csv
+
+================================================================================
+E2 INTERVENTIONS EXPERIMENT COMPLETE!
+    dataset      intervention    Reliance_R  Sensitivity_S   MSE_MV   MSE_PI
+      ETTh1        I1_shuffle  3.641855e-01   3.101646e-02 0.386266 0.379334
+      ETTh1 I2_swap_unaligned  2.178603e+00   2.782151e-02 0.386266 0.373368
+      ETTh1   I3_swap_aligned  7.572516e-01   2.810565e-02 0.386266 0.372389
+      ETTh1          I4_iaaft  6.107832e-01   2.593570e-02 0.386266 0.378266
+      ETTh1       I6_shift_24  1.041765e+00   2.243654e-02 0.386266 0.378010
+      ETTh1           N1_perm -6.555760e-07   8.459446e-08 0.386266 0.386266
+      ETTh1            N2_dup  6.894587e-01   1.050932e-02 0.386266 0.389713
+      ETTh1            N3_lag  1.236692e-01   1.263875e-02 0.386266 0.388227
+      ETTh1          N4_noise  1.131675e-01   2.887330e-02 0.386266 0.383961
+      ETTh1        P1_lead_16  4.453103e-01   2.925135e-02 0.386266 0.343994
+      ETTh1        P1_lead_32 -6.072446e-01   4.868515e-02 0.386266 0.301521
+electricity        I1_shuffle  2.673144e-01   8.588202e-04 0.183166 0.186744
+electricity I2_swap_unaligned  2.193459e-01   6.725774e-04 0.183166 0.186988
+electricity   I3_swap_aligned  6.795724e-02   6.811943e-04 0.183166 0.188697
+electricity          I4_iaaft -5.105416e-01   7.058494e-04 0.183166 0.190909
+electricity       I6_shift_24  1.019195e-01   5.946127e-04 0.183166 0.191527
+electricity           N1_perm  5.360819e-02   5.294280e-04 0.183166 0.179943
+electricity            N2_dup  2.081463e-01   1.815411e-04 0.183166 0.183664
+electricity            N3_lag -8.136383e-02   1.569406e-04 0.183166 0.184601
+electricity          N4_noise -1.014946e-01   8.351168e-04 0.183166 0.186048
+electricity        P1_lead_16  4.003867e-01   2.672242e-04 0.183166 0.178614
+electricity        P1_lead_32  1.634597e-01   3.496821e-04 0.183166 0.170630
+    weather        I1_shuffle  4.255202e-01   1.355921e-02 0.192263 0.218435
+    weather I2_swap_unaligned -1.531093e+00   1.295962e-02 0.192263 0.197246
+    weather   I3_swap_aligned -1.181738e+00   1.248579e-02 0.192263 0.205158
+    weather          I4_iaaft  1.333382e+00   1.213508e-02 0.192263 0.204765
+    weather       I6_shift_24  1.721812e-02   9.217769e-03 0.192263 0.196184
+    weather           N1_perm -3.206678e-06   2.523443e-08 0.192263 0.192263
+    weather            N2_dup -1.247319e-02   2.707176e-03 0.192263 0.194224
+    weather            N3_lag -4.969524e-02   2.937805e-03 0.192263 0.193358
+    weather          N4_noise  1.073771e+00   1.515002e-02 0.192263 0.230862
+    weather        P1_lead_16 -2.367824e-01   9.836876e-03 0.192263 0.173097
+    weather        P1_lead_32 -1.043751e-01   1.480490e-02 0.192263 0.156509
+================================================================================
+[2026-09-28 22:54:58] [MASTER PIPELINE] SUCCESS: E2: Target-Centric Interventions completed in 12703.6s
+[2026-09-28 22:54:58] [MASTER PIPELINE] Starting E3: Controlled Synthetic Structures & Oracles...
+[2026-09-28 22:54:58] [MASTER PIPELINE] Command: python3 -u /root/autodl-tmp/DASFAA/experiments/run_e3_synthetic.py --windows 30 --horizon 96
+================================================================================
+STARTING E3: SYNTHETIC DATA & ORACLE GAP CLOSURE EXPERIMENT
+Context: 512, Horizon: 96, Windows per config: 30
+================================================================================
+Loading TimesFM-3.0 Evaluator from /root/autodl-tmp/models/timesfm-3.0-pytorch on cuda...
+Loading weights from local directory
+TimesFM-3.0 successfully initialized (try_gc monkeypatched).
+Total synthetic configurations to evaluate: 39
+[5/39] G1 {'N': 8, 'rank': 1, 'gamma': 0.75} | B: -0.47% | GC: -0.096 | Elapsed: 19.2s
+[10/39] G1 {'N': 8, 'rank': 2, 'gamma': 0.75} | B: -1.75% | GC: -0.440 | Elapsed: 38.1s
+[15/39] G1 {'N': 8, 'rank': 4, 'gamma': 0.75} | B: +5.12% | GC: 1.163 | Elapsed: 57.1s
+[20/39] G2 {'N': 16, 'block_size': 4, 'gamma': 0.5} | B: +5.20% | GC: 2.524 | Elapsed: 75.4s
+[25/39] G3 {'N': 8, 'delta': 0.0, 'gamma': 0.5, 'tau_loc': 'pred_start'} | B: +5.43% | GC: 1.649 | Elapsed: 93.2s
+[30/39] G3 {'N': 8, 'delta': 0.5, 'gamma': 0.5, 'tau_loc': 'mid'} | B: +5.46% | GC: 1.704 | Elapsed: 109.9s
+[35/39] G5 {'N': 8, 'lag': 16, 'lead_coeff': 0.8} | B: +3.43% | GC: -3.221 | Elapsed: 126.7s
+[39/39] G6 {'N': 32} | B: +3.18% | GC: -1.842 | Elapsed: 141.7s
+
+================================================================================
+E3 SYNTHETIC EXPERIMENT COMPLETE!
+   generator                              params  Benefit_B_pct  Gap_Closure_GC
+0         G1   {'N': 8, 'rank': 1, 'gamma': 0.0}       1.826454       -7.346940
+1         G1  {'N': 8, 'rank': 1, 'gamma': 0.25}       1.588043        0.552917
+2         G1   {'N': 8, 'rank': 1, 'gamma': 0.5}       4.330841        1.039548
+3         G1  {'N': 32, 'rank': 1, 'gamma': 0.5}       5.543470        0.942318
+4         G1  {'N': 8, 'rank': 1, 'gamma': 0.75}      -0.470390       -0.096379
+5         G1   {'N': 8, 'rank': 2, 'gamma': 0.0}       0.953130       -2.845322
+6         G1  {'N': 8, 'rank': 2, 'gamma': 0.25}       1.305185        0.566003
+7         G1   {'N': 8, 'rank': 2, 'gamma': 0.5}       0.108256        0.055755
+8         G1  {'N': 32, 'rank': 2, 'gamma': 0.5}       1.031876        0.381559
+9         G1  {'N': 8, 'rank': 2, 'gamma': 0.75}      -1.749379       -0.440127
+10        G1   {'N': 8, 'rank': 4, 'gamma': 0.0}       2.703675       -6.092835
+11        G1  {'N': 8, 'rank': 4, 'gamma': 0.25}       1.958703        0.663127
+12        G1   {'N': 8, 'rank': 4, 'gamma': 0.5}       1.129315        0.360845
+13        G1  {'N': 32, 'rank': 4, 'gamma': 0.5}       5.981143        1.527401
+14        G1  {'N': 8, 'rank': 4, 'gamma': 0.75}       5.117778        1.162999
+================================================================================
+[2026-09-28 22:57:25] [MASTER PIPELINE] SUCCESS: E3: Controlled Synthetic Structures & Oracles completed in 147.0s
+[2026-09-28 22:57:25] [MASTER PIPELINE] Starting E5: Channel Budget K & Efficiency Front...
+[2026-09-28 22:57:25] [MASTER PIPELINE] Command: python3 -u /root/autodl-tmp/DASFAA/experiments/run_e5_grouping.py --datasets electricity solar --horizon 96 --samples 50
+================================================================================
+STARTING E5: CHANNEL BUDGET K & SELECTION STRATEGIES EXPERIMENT
+Horizon: 96, Context Length: 512, Windows: 50
+================================================================================
+Loading TimesFM-3.0 Evaluator from /root/autodl-tmp/models/timesfm-3.0-pytorch on cuda...
+Loading weights from local directory
+TimesFM-3.0 successfully initialized (try_gc monkeypatched).
+
+>>> Running E5 on Dataset: electricity
+Computing training correlation matrix...
+
+--- Testing Channel Budget K = 1 ---
+Strategy: k1_univariate   | K:   1 | MSE: 0.1352 | MAE: 0.2261 | Latency: 53.0ms | Peak VRAM: 1272.0MB
+
+--- Testing Channel Budget K = 2 ---
+Strategy: top_k           | K:   2 | MSE: 0.1360 | MAE: 0.2250 | Latency: 53.7ms | Peak VRAM: 1274.6MB
+Strategy: bottom_k        | K:   2 | MSE: 0.1368 | MAE: 0.2259 | Latency: 52.9ms | Peak VRAM: 1274.6MB
+Strategy: random          | K:   2 | MSE: 0.1357 | MAE: 0.2250 | Latency: 53.1ms | Peak VRAM: 1274.6MB
+
+--- Testing Channel Budget K = 4 ---
+Strategy: top_k           | K:   4 | MSE: 0.1352 | MAE: 0.2244 | Latency: 54.4ms | Peak VRAM: 1279.4MB
+Strategy: bottom_k        | K:   4 | MSE: 0.1366 | MAE: 0.2255 | Latency: 53.2ms | Peak VRAM: 1279.4MB
+Strategy: random          | K:   4 | MSE: 0.1346 | MAE: 0.2241 | Latency: 53.0ms | Peak VRAM: 1279.4MB
+
+--- Testing Channel Budget K = 8 ---
+Strategy: top_k           | K:   8 | MSE: 0.1350 | MAE: 0.2246 | Latency: 53.8ms | Peak VRAM: 1289.1MB
+Strategy: bottom_k        | K:   8 | MSE: 0.1363 | MAE: 0.2253 | Latency: 54.0ms | Peak VRAM: 1289.1MB
+Strategy: random          | K:   8 | MSE: 0.1342 | MAE: 0.2236 | Latency: 52.8ms | Peak VRAM: 1289.1MB
+
+--- Testing Channel Budget K = 16 ---
+Strategy: top_k           | K:  16 | MSE: 0.1347 | MAE: 0.2244 | Latency: 53.1ms | Peak VRAM: 1308.4MB
+Strategy: bottom_k        | K:  16 | MSE: 0.1360 | MAE: 0.2249 | Latency: 54.2ms | Peak VRAM: 1308.4MB
+Strategy: random          | K:  16 | MSE: 0.1339 | MAE: 0.2236 | Latency: 53.0ms | Peak VRAM: 1308.4MB
+
+--- Testing Channel Budget K = 32 ---
+Strategy: top_k           | K:  32 | MSE: 0.1344 | MAE: 0.2241 | Latency: 53.8ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K:  32 | MSE: 0.1355 | MAE: 0.2247 | Latency: 54.9ms | Peak VRAM: 1347.2MB
+Strategy: random          | K:  32 | MSE: 0.1340 | MAE: 0.2237 | Latency: 54.8ms | Peak VRAM: 1347.2MB
+
+--- Testing Channel Budget K = 64 ---
+Strategy: top_k           | K:  64 | MSE: 0.1344 | MAE: 0.2241 | Latency: 108.0ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K:  64 | MSE: 0.1355 | MAE: 0.2247 | Latency: 109.5ms | Peak VRAM: 1347.2MB
+Strategy: random          | K:  64 | MSE: 0.1340 | MAE: 0.2237 | Latency: 108.9ms | Peak VRAM: 1347.2MB
+
+--- Testing Channel Budget K = 128 ---
+Strategy: top_k           | K: 128 | MSE: 0.1344 | MAE: 0.2241 | Latency: 218.6ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K: 128 | MSE: 0.1355 | MAE: 0.2247 | Latency: 217.1ms | Peak VRAM: 1347.2MB
+Strategy: random          | K: 128 | MSE: 0.1340 | MAE: 0.2237 | Latency: 216.7ms | Peak VRAM: 1347.2MB
+
+>>> Running E5 on Dataset: solar
+Computing training correlation matrix...
+
+--- Testing Channel Budget K = 1 ---
+Strategy: k1_univariate   | K:   1 | MSE: 0.2138 | MAE: 0.2044 | Latency: 50.9ms | Peak VRAM: 1272.0MB
+
+--- Testing Channel Budget K = 2 ---
+Strategy: top_k           | K:   2 | MSE: 0.2182 | MAE: 0.2052 | Latency: 53.1ms | Peak VRAM: 1274.6MB
+Strategy: bottom_k        | K:   2 | MSE: 0.2374 | MAE: 0.2148 | Latency: 52.6ms | Peak VRAM: 1274.6MB
+Strategy: random          | K:   2 | MSE: 0.2194 | MAE: 0.2069 | Latency: 52.0ms | Peak VRAM: 1274.6MB
+
+--- Testing Channel Budget K = 4 ---
+Strategy: top_k           | K:   4 | MSE: 0.2328 | MAE: 0.2116 | Latency: 52.1ms | Peak VRAM: 1279.4MB
+Strategy: bottom_k        | K:   4 | MSE: 0.2501 | MAE: 0.2207 | Latency: 53.5ms | Peak VRAM: 1279.4MB
+Strategy: random          | K:   4 | MSE: 0.2443 | MAE: 0.2183 | Latency: 52.0ms | Peak VRAM: 1279.4MB
+
+--- Testing Channel Budget K = 8 ---
+Strategy: top_k           | K:   8 | MSE: 0.2480 | MAE: 0.2178 | Latency: 52.1ms | Peak VRAM: 1289.1MB
+Strategy: bottom_k        | K:   8 | MSE: 0.2570 | MAE: 0.2247 | Latency: 53.0ms | Peak VRAM: 1289.1MB
+Strategy: random          | K:   8 | MSE: 0.2540 | MAE: 0.2215 | Latency: 53.0ms | Peak VRAM: 1289.1MB
+
+--- Testing Channel Budget K = 16 ---
+Strategy: top_k           | K:  16 | MSE: 0.2553 | MAE: 0.2210 | Latency: 52.0ms | Peak VRAM: 1308.4MB
+Strategy: bottom_k        | K:  16 | MSE: 0.2585 | MAE: 0.2247 | Latency: 52.4ms | Peak VRAM: 1308.4MB
+Strategy: random          | K:  16 | MSE: 0.2623 | MAE: 0.2243 | Latency: 53.5ms | Peak VRAM: 1308.4MB
+
+--- Testing Channel Budget K = 32 ---
+Strategy: top_k           | K:  32 | MSE: 0.2578 | MAE: 0.2227 | Latency: 53.6ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K:  32 | MSE: 0.2601 | MAE: 0.2247 | Latency: 53.7ms | Peak VRAM: 1347.2MB
+Strategy: random          | K:  32 | MSE: 0.2668 | MAE: 0.2254 | Latency: 54.5ms | Peak VRAM: 1347.2MB
+
+--- Testing Channel Budget K = 64 ---
+Strategy: top_k           | K:  64 | MSE: 0.2578 | MAE: 0.2227 | Latency: 108.1ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K:  64 | MSE: 0.2601 | MAE: 0.2247 | Latency: 108.9ms | Peak VRAM: 1347.2MB
+Strategy: random          | K:  64 | MSE: 0.2668 | MAE: 0.2254 | Latency: 107.3ms | Peak VRAM: 1347.2MB
+
+--- Testing Channel Budget K = 128 ---
+Strategy: top_k           | K: 128 | MSE: 0.2578 | MAE: 0.2227 | Latency: 216.9ms | Peak VRAM: 1347.2MB
+Strategy: bottom_k        | K: 128 | MSE: 0.2601 | MAE: 0.2247 | Latency: 217.7ms | Peak VRAM: 1347.2MB
+Strategy: random          | K: 128 | MSE: 0.2668 | MAE: 0.2254 | Latency: 217.3ms | Peak VRAM: 1347.2MB
+
+================================================================================
+E5 EXPERIMENT COMPLETE!
+    dataset   K      strategy      MSE      MAE  latency_ms  peak_vram_mb
+electricity   1 k1_univariate 0.135244 0.226126   53.028284   1271.966309
+electricity   2         top_k 0.135954 0.225049   53.661237   1274.584473
+electricity   2      bottom_k 0.136756 0.225882   52.921860   1274.584473
+electricity   2        random 0.135718 0.225029   53.102112   1274.584473
+electricity   4         top_k 0.135189 0.224375   54.410884   1279.422363
+electricity   4      bottom_k 0.136568 0.225525   53.244557   1279.422363
+electricity   4        random 0.134585 0.224069   53.046485   1279.422363
+electricity   8         top_k 0.135014 0.224562   53.798606   1289.096680
+electricity   8      bottom_k 0.136333 0.225299   53.986246   1289.096680
+electricity   8        random 0.134193 0.223615   52.823060   1289.096680
+electricity  16         top_k 0.134719 0.224435   53.143490   1308.447266
+electricity  16      bottom_k 0.135998 0.224879   54.230182   1308.447266
+electricity  16        random 0.133949 0.223595   52.963991   1308.447266
+electricity  32         top_k 0.134447 0.224139   53.833871   1347.157715
+electricity  32      bottom_k 0.135527 0.224660   54.892873   1347.157715
+electricity  32        random 0.133952 0.223707   54.775758   1347.157715
+electricity  64         top_k 0.134447 0.224139  107.990393   1347.157715
+electricity  64      bottom_k 0.135527 0.224660  109.455736   1347.157715
+electricity  64        random 0.133952 0.223707  108.864368   1347.157715
+electricity 128         top_k 0.134447 0.224139  218.561069   1347.157715
+electricity 128      bottom_k 0.135527 0.224660  217.077423   1347.157715
+electricity 128        random 0.133952 0.223707  216.710325   1347.157715
+      solar   1 k1_univariate 0.213789 0.204369   50.932069   1271.966309
+      solar   2         top_k 0.218204 0.205230   53.087806   1274.584473
+      solar   2      bottom_k 0.237379 0.214829   52.593026   1274.584473
+      solar   2        random 0.219422 0.206922   52.044685   1274.584473
+      solar   4         top_k 0.232825 0.211579   52.102710   1279.422363
+      solar   4      bottom_k 0.250052 0.220720   53.487805   1279.422363
+      solar   4        random 0.244258 0.218272   51.953797   1279.422363
+      solar   8         top_k 0.247984 0.217762   52.136485   1289.096680
+      solar   8      bottom_k 0.257004 0.224664   53.003656   1289.096680
+      solar   8        random 0.253975 0.221541   52.986390   1289.096680
+      solar  16         top_k 0.255280 0.220958   51.963253   1308.447266
+      solar  16      bottom_k 0.258501 0.224707   52.408577   1308.447266
+      solar  16        random 0.262250 0.224281   53.450204   1308.447266
+      solar  32         top_k 0.257792 0.222746   53.623016   1347.157715
+      solar  32      bottom_k 0.260061 0.224723   53.671773   1347.157715
+      solar  32        random 0.266836 0.225392   54.480652   1347.157715
+      solar  64         top_k 0.257792 0.222746  108.142918   1347.157715
+      solar  64      bottom_k 0.260061 0.224723  108.913855   1347.157715
+      solar  64        random 0.266836 0.225392  107.292126   1347.157715
+      solar 128         top_k 0.257792 0.222746  216.924652   1347.157715
+      solar 128      bottom_k 0.260061 0.224723  217.695250   1347.157715
+      solar 128        random 0.266836 0.225392  217.289668   1347.157715
+================================================================================
+[2026-09-28 23:46:24] [MASTER PIPELINE] SUCCESS: E5: Channel Budget K & Efficiency Front completed in 2938.7s
+[2026-09-28 23:46:24] [MASTER PIPELINE] Starting Paper Tables & Figure Generation...
+[2026-09-28 23:46:24] [MASTER PIPELINE] Command: python3 -u /root/autodl-tmp/DASFAA/analysis/generate_paper_tables_and_plots.py
+Generated Table 2 LaTeX: /root/autodl-tmp/DASFAA/paper_figures/table2_ltsf_main.tex
+Generated Figure 1: /root/autodl-tmp/DASFAA/paper_figures/fig1_four_quadrant.pdf
+/root/autodl-tmp/DASFAA/analysis/generate_paper_tables_and_plots.py:113: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax.set_xticklabels(summary["intervention"], rotation=35, ha="right")
+Generated Figure 2: /root/autodl-tmp/DASFAA/paper_figures/fig2_interventions.pdf
+Generated Figure 3: /root/autodl-tmp/DASFAA/paper_figures/fig3_synthetic_gc.pdf
+Generated Figure 4: /root/autodl-tmp/DASFAA/paper_figures/fig4_channel_budget.pdf
+Paper figures & table generation script executed successfully.
+[2026-09-28 23:46:26] [MASTER PIPELINE] SUCCESS: Paper Tables & Figure Generation completed in 2.0s
+[2026-09-28 23:46:26] [MASTER PIPELINE] ================================================================================
+[2026-09-28 23:46:26] [MASTER PIPELINE] ALL EXPERIMENTS & ARTIFACTS COMPLETE!
+[2026-09-28 23:46:26] [MASTER PIPELINE] ================================================================================
